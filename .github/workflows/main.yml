@@ -21,7 +21,7 @@ jobs:
           git config --global user.email rodrigodesouzacastro@gmail.com
           git config --global user.name Rodrigo Castro
           git status
-          git remote add origin https://${{secrets.commit_secret}}@github.com/castrors/linkdekutree.git
+          git remote add origin https://${{secrets.commit_secret}}@github.com/castrors/castrors.github.io.git
           git checkout -b gh-pages
           git add --all
           git commit -m "update"
