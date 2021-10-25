@@ -18,6 +18,7 @@ jobs:
       - run: |
           cd build/web
           git init
+          git config --global init.defaultBranch main
           git config --global user.email rodrigodesouzacastro@gmail.com
           git config --global user.name Rodrigo Castro
           git status
