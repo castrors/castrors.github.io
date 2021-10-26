@@ -8,7 +8,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'components/components.dart';
 
 void main() async{
-  await dotenv.load(fileName: ".env");
+  await dotenv.load(fileName: "dotenv");
   runApp(const Blog());
 }
 
