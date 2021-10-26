@@ -4,24 +4,28 @@ on:
     branches:
       - main
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
+  build:
+    name: Build Web
     env:
       my_secret: ${{secrets.commit_secret}}
       DATO_API_KEY: ${{secrets.dato_api_key}}
-    
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout 🛎️
-        uses: subosito/flutter-action@v1
-
-      - name: Install and Build 🔧
-        run: |
-          flutter pub get
-          flutter build web --release
-
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@4.1.5
-        with:
-          branch: gh-pages 
-          folder: build/web
-          ssh-key: ${{ secrets.commit_secret}}
+      - uses: actions/checkout@v1
+      - uses: subosito/flutter-action@v1
+      - run: flutter pub get
+      #- run: flutter test
+      - run: flutter build web --release
+      - run: |
+          cd build/web
+          git init
+          git config --global init.defaultBranch main
+          git config --global user.email rodrigodesouzacastro@gmail.com
+          git config --global user.name Rodrigo Castro
+          echo rodrigocastro.ninja > CNAME
+          git status
+          git remote add origin https://${{secrets.commit_secret}}@github.com/castrors/castrors.github.io.git
+          git checkout -b gh-pages
+          git add --all
+          git commit -m "update"
+          git push origin gh-pages -f
