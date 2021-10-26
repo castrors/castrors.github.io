@@ -10,7 +10,8 @@ class DatoApiClient {
     final response = await http.post(
       Uri.parse("https://graphql.datocms.com/"),
       headers: {
-        HttpHeaders.authorizationHeader: dotenv.env['DATO_API_KEY']!,
+        HttpHeaders.authorizationHeader:
+            const String.fromEnvironment('DATO_API_KEY'),
         HttpHeaders.acceptHeader: 'application/json',
         HttpHeaders.contentTypeHeader: 'application/json'
       },

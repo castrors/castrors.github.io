@@ -15,7 +15,7 @@ jobs:
       - uses: subosito/flutter-action@v1
       - run: flutter pub get
       #- run: flutter test
-      - run: flutter build web --release
+      - run: flutter build web --release --dart-define=DATO_API_KEY=${{secrets.dato_api_key}}
       - run: |
           cd build/web
           git init
