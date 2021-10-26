@@ -1,9 +1,14 @@
+import 'package:blog/components/blog_links_builder.dart';
+import 'package:blog/services/dato_api_client.dart';
+import 'package:blog/services/models/my_link.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'components/components.dart';
 
-void main() {
+void main() async{
+  await dotenv.load(fileName: ".env");
   runApp(const Blog());
 }
 
@@ -38,23 +43,17 @@ class _HomePageState extends State<HomePage> {
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
     BlogHeader(),
-    Text(
-      'Blog',
-      style: optionStyle,
-    ),
+    BlogLinksBuilder(),
     Text(
       'Links',
       style: optionStyle,
     ),
-    Text(
-      'Viagens',
-      style: optionStyle,
-    ),
   ];
 
-  void _onItemTapped(int index) {
+  void _onItemTapped(int index) async {
     setState(() {
       _selectedIndex = index;
+      
     });
   }
 
