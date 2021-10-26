@@ -11,19 +11,30 @@ class BlogHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: const EdgeInsets.all(16),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           ClipOval(
               child: Image.network(
-            "https://avatars.githubusercontent.com/u/1944720?s=200&v=4",
-            height: 200,
-            width: 200,
+            "https://avatars.githubusercontent.com/u/1944720?s=120&v=4",
+            height: 120,
+            width: 120,
           )),
           const BlogTitle(text: "Rodrigo Castro"),
+          const SizedBox(
+            height: 8,
+          ),
           const BlogSubtitle(text: "Mobile Developer", color: Colors.black),
+          const SizedBox(
+            height: 8,
+          ),
           const BlogDescription(
               text:
                   "Brasileiro morando na Alemanha. Escrevo sobre desenvolvimento de aplicações móveis, viagens e vida na Alemanha."),
+          const SizedBox(
+            height: 16,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -41,6 +52,16 @@ class BlogHeader extends StatelessWidget {
               IconButton(
                 icon: const FaIcon(FontAwesomeIcons.github),
                 onPressed: () => _launchURL('https://github.com/castrors'),
+              ),
+              IconButton(
+                icon: const FaIcon(FontAwesomeIcons.instagram),
+                onPressed: () =>
+                    _launchURL('https://instagram.com/rodrigocastro_o'),
+              ),
+              IconButton(
+                icon: const FaIcon(FontAwesomeIcons.unsplash),
+                onPressed: () =>
+                    _launchURL('https://unsplash.com/@rodrigocastro_o'),
               ),
             ],
           ),

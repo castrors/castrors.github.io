@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'components/components.dart';
 
@@ -12,11 +13,11 @@ class Blog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: "Rodrigo Castro's Adventures",
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.teal,
       ),
-      home: const HomePage(title: "Rodrigo Castro's Blog"),
+      home: const HomePage(title: "Rodrigo Castro's Adventures"),
     );
   }
 }
@@ -31,13 +32,65 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  int _selectedIndex = 0;
+
+  static const TextStyle optionStyle =
+      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  static const List<Widget> _widgetOptions = <Widget>[
+    BlogHeader(),
+    Text(
+      'Blog',
+      style: optionStyle,
+    ),
+    Text(
+      'Links',
+      style: optionStyle,
+    ),
+    Text(
+      'Viagens',
+      style: optionStyle,
+    ),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: const Center(child: BlogHeader()),
+      // body: const Center(child: BlogHeader()),
+      body: Center(child: _widgetOptions.elementAt(_selectedIndex)),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: FaIcon(FontAwesomeIcons.houseUser),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: FaIcon(FontAwesomeIcons.feather),
+            label: 'Blog',
+          ),
+          BottomNavigationBarItem(
+            icon: FaIcon(FontAwesomeIcons.link),
+            label: 'Links',
+          ),
+          BottomNavigationBarItem(
+            icon: FaIcon(FontAwesomeIcons.mapMarkedAlt),
+            label: 'Viagens',
+          ),
+        ],
+        unselectedItemColor: Colors.grey,
+        showUnselectedLabels: true,
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.teal,
+        onTap: _onItemTapped,
+      ),
     );
   }
 }
