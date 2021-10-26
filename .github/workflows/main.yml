@@ -10,6 +10,7 @@ jobs:
       my_secret: ${{secrets.commit_secret}}
       DATO_API_KEY: ${{secrets.dato_api_key}}
     runs-on: ubuntu-latest
+    environment: test-env
     steps:
       - uses: actions/checkout@v1
       - uses: subosito/flutter-action@v1
