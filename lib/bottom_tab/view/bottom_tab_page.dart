@@ -1,40 +1,24 @@
+import 'package:blog/bottom_tab/bottom_tab.dart';
+import 'package:blog/l10n/l10n.dart';
 import 'package:blog/widgets/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-void main() async {
-  await dotenv.load(fileName: "dotenv");
-  runApp(const Blog());
-}
-
-class Blog extends StatelessWidget {
-  const Blog({Key? key}) : super(key: key);
+class BottomTabPage extends StatelessWidget {
+  const BottomTabPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: "Rodrigo Castro's Adventures",
-      theme: ThemeData(
-        primarySwatch: Colors.teal,
-      ),
-      home: const HomePage(title: "Rodrigo Castro's Adventures"),
+    return BlocProvider(
+      create: (_) => BottomTabCubit(),
+      child: const BottomTabView(),
     );
   }
 }
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  int _selectedIndex = 0;
-
+class BottomTabView extends StatelessWidget {
+  const BottomTabView({Key? key}) : super(key: key);
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
@@ -44,19 +28,20 @@ class _HomePageState extends State<HomePage> {
       'Links',
       style: optionStyle,
     ),
+    Text(
+      'Trips',
+      style: optionStyle,
+    ),
   ];
-
-  void _onItemTapped(int index) async {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final _selectedIndex =
+        context.select((BottomTabCubit cubit) => cubit.state.index);
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text("Rodrigo Castro's Adventures"),
       ),
       // body: const Center(child: BlogHeader()),
       body: Center(child: _widgetOptions.elementAt(_selectedIndex)),
@@ -83,7 +68,7 @@ class _HomePageState extends State<HomePage> {
         showUnselectedLabels: true,
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.teal,
-        onTap: _onItemTapped,
+        onTap: (index) => context.read<BottomTabCubit>().select(index),
       ),
     );
   }

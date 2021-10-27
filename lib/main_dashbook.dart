@@ -1,34 +1,32 @@
-import 'package:flutter/material.dart';
-
+import 'package:blog/widgets/widgets.dart';
 import 'package:dashbook/dashbook.dart';
-
-import 'components/components.dart';
+import 'package:flutter/material.dart';
 
 void main() {
   final dashbook = Dashbook();
 
   dashbook.storiesOf('Blog Title').decorator(CenterDecorator()).add(
         'default',
-        (ctx) => BlogTitle(
+        (ctx) => TitleWidget(
           text: ctx.textProperty("text", "Title"),
         ),
       );
   dashbook.storiesOf('Blog Subtitle').decorator(CenterDecorator()).add(
         'default',
-        (ctx) => BlogSubtitle(
+        (ctx) => SubtitleWidget(
           text: ctx.textProperty("text", "Subtitle"),
         ),
       );
 
   dashbook.storiesOf('Blog Description').decorator(CenterDecorator()).add(
         'default',
-        (ctx) => BlogDescription(
+        (ctx) => DescriptionWidget(
           text: ctx.textProperty("text", "Description"),
         ),
       );
   dashbook.storiesOf('Blog Header').decorator(CenterDecorator()).add(
         'default',
-        (ctx) => const BlogHeader(),
+        (ctx) => const HeaderWidget(),
       );
 
   runApp(dashbook);

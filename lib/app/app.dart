@@ -5,9 +5,9 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
+import 'package:blog/bottom_tab/bottom_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:blog/counter/counter.dart';
 import 'package:blog/l10n/l10n.dart';
 
 class App extends StatelessWidget {
@@ -15,9 +15,11 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = ThemeData();
     return MaterialApp(
-      theme: ThemeData(
-        accentColor: const Color(0xFF13B9FF),
+      theme: theme.copyWith(
+        colorScheme:
+            theme.colorScheme.copyWith(secondary: const Color(0xFF13B9FF)),
         appBarTheme: const AppBarTheme(color: Color(0xFF13B9FF)),
       ),
       localizationsDelegates: [
@@ -25,7 +27,7 @@ class App extends StatelessWidget {
         GlobalMaterialLocalizations.delegate,
       ],
       supportedLocales: AppLocalizations.supportedLocales,
-      home: const CounterPage(),
+      home: const BottomTabPage(),
     );
   }
 }

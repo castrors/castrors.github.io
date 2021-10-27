@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class BlogTitle extends StatelessWidget {
-  // ignore: use_key_in_widget_constructors
-  const BlogTitle({required this.text, this.color = Colors.black});
+class DescriptionWidget extends StatelessWidget {
+  const DescriptionWidget(
+      {Key? key, required this.text, this.color = Colors.black})
+      : super(key: key);
 
   final String text;
   final Color color;
@@ -13,8 +14,8 @@ class BlogTitle extends StatelessWidget {
     return Text(
       text,
       style: GoogleFonts.ubuntu(
-          textStyle: Theme.of(context).textTheme.headline4,
-          color: Colors.black),
+          textStyle: Theme.of(context).textTheme.bodyText1,
+          color: color),
     );
   }
 }

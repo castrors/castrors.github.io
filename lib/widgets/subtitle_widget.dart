@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class BlogSubtitle extends StatelessWidget {
-  const BlogSubtitle({Key? key, required this.text, this.color = Colors.black})
+class SubtitleWidget extends StatelessWidget {
+  const SubtitleWidget(
+      {Key? key, required this.text, this.color = Colors.black})
       : super(key: key);
 
   final String text;
@@ -13,8 +14,9 @@ class BlogSubtitle extends StatelessWidget {
     return Text(
       text,
       style: GoogleFonts.ubuntu(
-          textStyle: Theme.of(context).textTheme.headline6,
-          color: color),
+        textStyle: Theme.of(context).textTheme.headline6,
+        color: color,
+      ),
     );
   }
 }

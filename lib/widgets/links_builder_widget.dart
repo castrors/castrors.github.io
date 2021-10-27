@@ -2,14 +2,14 @@ import 'package:blog/services/dato_api_client.dart';
 import 'package:blog/services/models/my_link.dart';
 import 'package:flutter/material.dart';
 
-class BlogLinksBuilder extends StatefulWidget {
-  const BlogLinksBuilder({Key? key}) : super(key: key);
+class LinksBuilderWidget extends StatefulWidget {
+  const LinksBuilderWidget({Key? key}) : super(key: key);
 
   @override
-  _BlogLinksBuilderState createState() => _BlogLinksBuilderState();
+  _LinksBuilderWidgetState createState() => _LinksBuilderWidgetState();
 }
 
-class _BlogLinksBuilderState extends State<BlogLinksBuilder> {
+class _LinksBuilderWidgetState extends State<LinksBuilderWidget> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<dynamic>>(

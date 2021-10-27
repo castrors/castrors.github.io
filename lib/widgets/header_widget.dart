@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'components.dart';
+import 'widgets.dart';
 
-class BlogHeader extends StatelessWidget {
-  const BlogHeader({
+class HeaderWidget extends StatelessWidget {
+  const HeaderWidget({
     Key? key,
   }) : super(key: key);
 
@@ -21,15 +21,15 @@ class BlogHeader extends StatelessWidget {
             height: 120,
             width: 120,
           )),
-          const BlogTitle(text: "Rodrigo Castro"),
+          const TitleWidget(text: "Rodrigo Castro"),
           const SizedBox(
             height: 8,
           ),
-          const BlogSubtitle(text: "Mobile Developer", color: Colors.black),
+          const SubtitleWidget(text: "Mobile Developer", color: Colors.black),
           const SizedBox(
             height: 8,
           ),
-          const BlogDescription(
+          const DescriptionWidget(
               text:
                   "Brasileiro morando na Alemanha. Escrevo sobre desenvolvimento de aplicações móveis, viagens e vida na Alemanha."),
           const SizedBox(
