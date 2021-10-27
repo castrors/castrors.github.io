@@ -29,17 +29,18 @@ class DatoApiClient {
     }
     ''',
     );
+    return <List<dynamic>>[];
 
-    try {
-      final content = jsonDecode(response.body)['data']['allLinks'];
+    // try {
+    //   final content = jsonDecode(response.body)['data']['allLinks'];
 
-      print(content);
+    //   print(content);
 
-      return content == null
-          ? Future.value(<MyLink>[])
-          : content.map((item) => MyLink.fromJson(item)).toList();
-    } catch (e) {
-      return [];
-    }
+    //   return content == null
+    //       ? Future.value(<MyLink>[])
+    //       : content.map((item) => MyLink.fromJson(item)).toList();
+    // } catch (e) {
+    //   return [];
+    // }
   }
 }

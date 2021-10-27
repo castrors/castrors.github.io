@@ -71,5 +71,5 @@ class BlogHeader extends StatelessWidget {
   }
 }
 
-void _launchURL(url) async =>
+void _launchURL(String url) async =>
     await canLaunch(url) ? await launch(url) : throw 'Could not launch $url';

@@ -1,4 +1,5 @@
 import 'package:blog/extensions/color.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class MyLink {
@@ -15,9 +16,12 @@ class MyLink {
 
   factory MyLink.fromJson(Map<String, dynamic> json) {
     return MyLink(
-        title: json['title'] as String,
-        url: json['url'] as String,
-        color: HexColor.fromHex(json['color']['hex']),
-        createdat: DateTime.parse(json['createdat']));
+        title: 'as', url: 'asd', color: Colors.black, createdat: DateTime.now()
+        // title: json['title'] as String,
+        // url: json['url'] as String,
+
+        // color: HexColor.fromHex(json['color']['hex']),
+        // createdat: DateTime.parse(json['createdat'])
+        );
   }
 }
