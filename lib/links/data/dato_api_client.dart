@@ -1,12 +1,12 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'models/models.dart';
-import 'package:http/http.dart' as http;
+import 'package:blog/links/models/models.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:http/http.dart' as http;
 
 class DatoApiClient {
-  static Future<List<dynamic>> fetchLinks() async {
+  Future<List<Link>> fetchLinks() async {
     final response = await http.post(
       Uri.parse("https://graphql.datocms.com/"),
       headers: {
@@ -29,18 +29,16 @@ class DatoApiClient {
     }
     ''',
     );
-    return <List<dynamic>>[];
 
-    // try {
-    //   final content = jsonDecode(response.body)['data']['allLinks'];
+    print(response);
 
-    //   print(content);
-
-    //   return content == null
-    //       ? Future.value(<MyLink>[])
-    //       : content.map((item) => MyLink.fromJson(item)).toList();
-    // } catch (e) {
-    //   return [];
-    // }
+    try {
+      final content = json.decode(response.body)['data']['allLinks'] as List;
+      return content
+          .map((dynamic item) => Link.fromJson(item as Map<String, dynamic>))
+          .toList();
+    } on Exception {
+      return [];
+    }
   }
 }

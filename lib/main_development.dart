@@ -12,9 +12,11 @@ import 'package:flutter/widgets.dart';
 import 'package:bloc/bloc.dart';
 import 'package:blog/app/app.dart';
 import 'package:blog/app/app_bloc_observer.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main() {
+void main() async {
   Bloc.observer = AppBlocObserver();
+  await dotenv.load(fileName: "dotenv");
   FlutterError.onError = (details) {
     log(details.exceptionAsString(), stackTrace: details.stack);
   };
