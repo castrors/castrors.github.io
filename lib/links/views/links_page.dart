@@ -1,6 +1,6 @@
-import 'package:blog/links/data/dato_api_client.dart';
 import 'package:blog/links/links.dart';
 import 'package:blog/links/widgets/widgets.dart';
+import 'package:blog/repository/repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

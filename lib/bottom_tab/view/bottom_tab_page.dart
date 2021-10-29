@@ -1,6 +1,7 @@
 import 'package:blog/bottom_tab/bottom_tab.dart';
 import 'package:blog/l10n/l10n.dart';
 import 'package:blog/links/links.dart';
+import 'package:blog/posts/posts.dart';
 import 'package:blog/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,10 +25,7 @@ class BottomTabView extends StatelessWidget {
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
     HeaderWidget(),
-    Text(
-      'Blog',
-      style: optionStyle,
-    ),
+    PostsPage(),
     LinksPage(),
     Text(
       'Trips',

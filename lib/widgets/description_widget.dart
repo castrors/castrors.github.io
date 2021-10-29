@@ -14,8 +14,9 @@ class DescriptionWidget extends StatelessWidget {
     return Text(
       text,
       style: GoogleFonts.ubuntu(
-          textStyle: Theme.of(context).textTheme.bodyText1,
-          color: color),
+        textStyle: Theme.of(context).textTheme.bodyText1,
+        color: color,
+      ),
     );
   }
 }

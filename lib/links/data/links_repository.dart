@@ -1,5 +1,5 @@
-import 'package:blog/links/data/dato_api_client.dart';
 import 'package:blog/links/models/models.dart';
+import 'package:blog/repository/repository.dart';
 
 class LinksRepository {
   LinksRepository({DatoApiClient? apiClient})
