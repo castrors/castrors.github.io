@@ -2,6 +2,7 @@ import 'package:blog/posts/posts.dart';
 import 'package:blog/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class PostsPopulated extends StatelessWidget {
   const PostsPopulated({Key? key, required this.posts}) : super(key: key);
@@ -21,6 +22,9 @@ class PostsPopulated extends StatelessWidget {
             ),
             subtitle: MarkdownBody(
               data: post.body,
+              selectable: true,
+              onTapLink: (text, href, title) =>
+                  href != null ? _launchURL(href) : null,
             ),
           ),
         );
@@ -29,3 +33,6 @@ class PostsPopulated extends StatelessWidget {
     );
   }
 }
+
+void _launchURL(String url) async =>
+    await canLaunch(url) ? await launch(url) : throw 'Could not launch $url';
