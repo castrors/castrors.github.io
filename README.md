@@ -1,16 +1,22 @@
-# blog
+# Blog do Rodrigo Castro
 
-A new Flutter project.
+![Badge](https://img.shields.io/badge/flutter-2.5.3-%233570B2?style=for-the-badge&logo=flutter)
 
-## Getting Started
+## :dart: Objetivo
 
-This project is a starting point for a Flutter application.
+Esse é um projeto Flutter web, hospedado no github pages e todo conteúdo dinâmico vem do DatoCMS. Quero usar esse projeto para testar algumas formas diferentes de gerenciamento de estado, aplicar testes unitários e de UI e por aí vai.
 
-A few resources to get you started if this is your first Flutter project:
+## :rocket: Executando o projeto
+```
+git clone https://github.com/castrors/castrors.github.io.git 
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+//Adicione sua chage do DatoCMS 
+echo DATO_API_KEY=COLOQUE_SUA_CHAVE_AQUI > dotenv
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+flutter run -t lib/main_development.dart
+```
+
+## :eyeglasses: Demo em produção
+
+[Link de acesso :dizzy:](https://rodrigocastro.ninja/)
+
