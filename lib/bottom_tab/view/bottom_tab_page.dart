@@ -1,3 +1,4 @@
+import 'package:blog/app/cubit/app_cubit.dart';
 import 'package:blog/bottom_tab/bottom_tab.dart';
 import 'package:blog/l10n/l10n.dart';
 import 'package:blog/links/links.dart';
@@ -40,34 +41,54 @@ class BottomTabView extends StatelessWidget {
         context.select((BottomTabCubit cubit) => cubit.state.index);
     return Scaffold(
       appBar: AppBar(
-        title: Text("Rodrigo Castro's Adventures"),
+        title: Text(l10n.homeTitle),
+        actions: [
+          MaterialButton(
+            child: const TextWidget(
+              text: 'Português 🇧🇷',
+              color: Colors.white,
+            ),
+            onPressed: () {
+              context.read<AppCubit>().selectLocale(LocaleOptions.pt);
+            },
+          ),
+          MaterialButton(
+            child: const TextWidget(
+              text: 'English 🇺🇸',
+              color: Colors.white,
+            ),
+            onPressed: () {
+              context.read<AppCubit>().selectLocale(LocaleOptions.en);
+            },
+          ),
+        ],
       ),
       // body: const Center(child: BlogHeader()),
       body: Center(child: _widgetOptions.elementAt(_selectedIndex)),
       bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: FaIcon(FontAwesomeIcons.houseUser),
-            label: 'Home',
+            label: l10n.tabHome,
           ),
           BottomNavigationBarItem(
             icon: FaIcon(FontAwesomeIcons.feather),
-            label: 'Blog',
+            label: l10n.tabBlog,
           ),
           BottomNavigationBarItem(
             icon: FaIcon(FontAwesomeIcons.link),
-            label: 'Links',
+            label: l10n.tabLinks,
           ),
           BottomNavigationBarItem(
             icon: FaIcon(FontAwesomeIcons.mapMarkedAlt),
-            label: 'Viagens',
+            label: l10n.tabTrips,
           ),
         ],
         unselectedItemColor: Colors.grey,
         showUnselectedLabels: true,
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.teal,
-        onTap: (index) => context.read<BottomTabCubit>().select(index),
+        onTap: (index) => context.read<BottomTabCubit>().selectTab(index),
       ),
     );
   }

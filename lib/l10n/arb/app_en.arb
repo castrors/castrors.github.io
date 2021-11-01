@@ -1,7 +1,13 @@
 {
     "@@locale": "en",
-    "counterAppBarTitle": "Counter",
-    "@counterAppBarTitle": {
-        "description": "Text shown in the AppBar of the Counter Page"
-    }
+    "jobTitle": "Senior Mobile Developer",
+    "@jobTitle": {
+        "description": "Text shown about the current position, showed in the Home screen"
+    },
+    "homeTitle": "Rodrigo Castro's Adventures",
+    "homeSubtitle": "Brazilian living in Germany. Here you will find content about mobile software development(mostly Flutter), software testing, travels, life in Germany and much more. ",
+    "tabHome":"Home",
+    "tabBlog": "Blog",
+    "tabLinks": "Links",
+    "tabTrips": "Trips"
 }

@@ -1,0 +1,15 @@
+{
+    "@@locale": "pt",
+    "jobTitle": "Desenvolvedor de Aplicações Móveis Senior",
+    "@jobTitle": {
+        "description": "Texto sobre a atual posição que atua, mostrada na tela Inicial"
+    },
+    "homeTitle": "As Aventuras de Rodrigo Castro",
+    "homeSubtitle": "Brasileiro morando na Alemanha. Aqui você vai encontrar conteúdo sobre desenvolvimento de Aplicações móveis(a maioria Flutter), testes de software, viagens, vida na Alemanha e muito mais.",
+    "tabHome":"Início",
+    "tabBlog": "Blog",
+    "tabLinks": "Links",
+    "tabTrips": "Viagens"
+
+
+}

@@ -1,3 +1,4 @@
+import 'package:blog/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -10,6 +11,7 @@ class HeaderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return Container(
       margin: const EdgeInsets.all(16),
       child: Column(
@@ -25,13 +27,11 @@ class HeaderWidget extends StatelessWidget {
           const SizedBox(
             height: 8,
           ),
-          const SubtitleWidget(text: "Mobile Developer", color: Colors.black),
+          SubtitleWidget(text: l10n.jobTitle, color: Colors.black),
           const SizedBox(
             height: 8,
           ),
-          const DescriptionWidget(
-              text:
-                  "Brasileiro morando na Alemanha. Escrevo sobre desenvolvimento de aplicações móveis, viagens e vida na Alemanha."),
+          DescriptionWidget(text: l10n.homeSubtitle),
           const SizedBox(
             height: 16,
           ),
