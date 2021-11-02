@@ -19,6 +19,7 @@ dependencies:
   flutter_markdown: ^0.6.8
   font_awesome_flutter: ^9.2.0
   google_fonts: ^2.1.0
+  google_maps: ^5.3.0
   http: ^0.13.4
   intl: ^0.17.0
   json_annotation: ^4.3.0
