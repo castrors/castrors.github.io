@@ -3,8 +3,7 @@ import 'dart:html';
 import 'dart:ui' as ui;
 
 import 'package:blog/trips/models/models.dart';
-import 'package:blog/widgets/description_widget.dart';
-import 'package:blog/widgets/title_widget.dart';
+import 'package:blog/trips/view/view.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps/google_maps.dart';
 
@@ -36,30 +35,13 @@ class TripsPopulated extends StatelessWidget {
             ..map = map
             ..title = trip.title,
         ).onClick.listen((event) {
-          showModalBottomSheet<void>(
-            context: context,
-            builder: (BuildContext context) {
-              return Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    TitleWidget(text: trip.title),
-                    DescriptionWidget(text: trip.description),
-                    for (final photo in trip.photos)
-                      Image.network(
-                        photo as String,
-                        height: 240,
-                        width: 240,
-                      ),
-                    ElevatedButton(
-                      child: const Text('Close BottomSheet'),
-                      onPressed: () => Navigator.pop(context),
-                    )
-                  ],
-                ),
-              );
-            },
+          Navigator.push(
+            context,
+            MaterialPageRoute<void>(
+              builder: (context) => TripDetailPage(
+                trip: trip,
+              ),
+            ),
           );
         });
       }

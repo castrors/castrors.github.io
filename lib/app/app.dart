@@ -32,7 +32,7 @@ class AppView extends StatelessWidget {
         appBarTheme: const AppBarTheme(color: Color(0xFF20bf6b)),
       ),
       locale: Locale(currentLocale.currentValue()),
-      localizationsDelegates: [
+      localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
       ],
