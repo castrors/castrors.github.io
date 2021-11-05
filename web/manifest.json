@@ -1,11 +1,11 @@
 {
-    "name": "Blog",
-    "short_name": "Blog",
+    "name": "Rodrigo Castro",
+    "short_name": "Rodrigo Castro",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "This is my website made with Flutter",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

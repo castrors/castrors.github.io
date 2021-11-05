@@ -26,6 +26,7 @@ class AppView extends StatelessWidget {
     final currentLocale = context.select((AppCubit cubit) => cubit.state);
     final theme = ThemeData();
     return MaterialApp(
+      title: 'Rodrigo Castro',
       theme: theme.copyWith(
         colorScheme:
             theme.colorScheme.copyWith(secondary: const Color(0xFF20bf6b)),
