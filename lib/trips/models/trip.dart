@@ -1,7 +1,7 @@
 // ignore_for_file: avoid_dynamic_calls
 
 import 'package:equatable/equatable.dart';
-import 'package:google_maps/google_maps.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class Trip extends Equatable {
   const Trip({
@@ -15,8 +15,8 @@ class Trip extends Equatable {
         title: json['title'] as String,
         description: json['description'] as String,
         location: LatLng(
-          json['location']['latitude'] as num,
-          json['location']['longitude'] as num,
+          json['location']['latitude'] as double,
+          json['location']['longitude'] as double,
         ),
         photos: List<String>.from(json['photos'] as List),
       );

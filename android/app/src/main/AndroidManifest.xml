@@ -4,6 +4,10 @@
    <application
         android:label="Blog"
         android:icon="@mipmap/ic_launcher">
+
+        <meta-data android:name="com.google.android.geo.API_KEY"
+               android:value="AIzaSyBntRjgrJhY_dFiRms8vPN6K60-MYYY0ag"/>
+
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

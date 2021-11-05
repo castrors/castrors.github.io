@@ -50,6 +50,10 @@ class HeaderWidget extends StatelessWidget {
                     _launchURL('https://twitter.com/rodrigocastro_o'),
               ),
               IconButton(
+                icon: const FaIcon(FontAwesomeIcons.dev),
+                onPressed: () => _launchURL('https://dev.to/rodrigocastro_o'),
+              ),
+              IconButton(
                 icon: const FaIcon(FontAwesomeIcons.github),
                 onPressed: () => _launchURL('https://github.com/castrors'),
               ),
