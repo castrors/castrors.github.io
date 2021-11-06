@@ -85,7 +85,7 @@ class BottomTabView extends StatelessWidget {
         unselectedItemColor: Colors.grey,
         showUnselectedLabels: true,
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.teal,
+        selectedItemColor: const Color(0xFF20bf6b),
         onTap: (index) => context.read<BottomTabCubit>().selectTab(index),
       ),
     );
