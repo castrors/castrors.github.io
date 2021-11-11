@@ -66,19 +66,19 @@ class BottomTabView extends StatelessWidget {
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: FaIcon(FontAwesomeIcons.houseUser),
+            icon: const FaIcon(FontAwesomeIcons.houseUser),
             label: l10n.tabHome,
           ),
           BottomNavigationBarItem(
-            icon: FaIcon(FontAwesomeIcons.feather),
+            icon: const FaIcon(FontAwesomeIcons.feather),
             label: l10n.tabBlog,
           ),
           BottomNavigationBarItem(
-            icon: FaIcon(FontAwesomeIcons.link),
+            icon: const FaIcon(FontAwesomeIcons.link),
             label: l10n.tabLinks,
           ),
           BottomNavigationBarItem(
-            icon: FaIcon(FontAwesomeIcons.mapMarkedAlt),
+            icon: const FaIcon(FontAwesomeIcons.mapMarkedAlt),
             label: l10n.tabTrips,
           ),
         ],

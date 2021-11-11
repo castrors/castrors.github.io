@@ -5,9 +5,16 @@ import 'package:blog/links/models/models.dart';
 import 'package:blog/posts/models/models.dart';
 import 'package:blog/trips/models/models.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:http/http.dart';
+import 'package:http/http.dart' as http;
 
 class DatoApiClient {
+  DatoApiClient({http.Client? httpClient})
+      : _httpClient = httpClient ?? http.Client();
+
+  static const _baseUrl = 'https://graphql.datocms.com/';
+
+  final http.Client _httpClient;
+
   Future<List<Link>> fetchLinks() async {
     try {
       final response = await _fetch('''
@@ -81,9 +88,9 @@ class DatoApiClient {
     }
   }
 
-  Future<Response> _fetch(String body) {
-    return post(
-      Uri.parse("https://graphql.datocms.com/"),
+  Future<http.Response> _fetch(String body) {
+    return _httpClient.post(
+      Uri.parse(_baseUrl),
       headers: {
         HttpHeaders.authorizationHeader: dotenv.env['DATO_API_KEY']!,
         HttpHeaders.acceptHeader: 'application/json',
