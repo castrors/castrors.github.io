@@ -24,7 +24,6 @@ jobs:
           git config --global init.defaultBranch main
           git config --global user.email rodrigodesouzacastro@gmail.com
           git config --global user.name Rodrigo Castro
-          echo rodrigocastro.ninja > CNAME
           git status
           git remote add origin https://${{secrets.commit_secret}}@github.com/castrors/castrors.github.io.git
           git checkout -b gh-pages
