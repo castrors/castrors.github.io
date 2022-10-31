@@ -7,26 +7,17 @@ jobs:
   build:
     name: Build Web
     env:
-      my_secret: ${{secrets.commit_secret}}
       DATO_API_KEY: ${{secrets.dato_api_key}}
     runs-on: ubuntu-latest
     environment: test-env
     steps:
-      - uses: actions/checkout@v1
-      - uses: subosito/flutter-action@v1
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2
       - run: echo DATO_API_KEY=${{secrets.dato_api_key}} > dotenv
-      - run: flutter pub get
       #- run: flutter test
       - run: flutter build web --release -t lib/main_development.dart
-      - run: |
-          cd build/web
-          git init
-          git config --global init.defaultBranch main
-          git config --global user.email rodrigodesouzacastro@gmail.com
-          git config --global user.name Rodrigo Castro
-          git status
-          git remote add origin https://${{secrets.commit_secret}}@github.com/castrors/castrors.github.io.git
-          git checkout -b gh-pages
-          git add --all
-          git commit -m "update"
-          git push origin gh-pages -f
+      - run: git config user.name github-actions
+      - run: git config user.email github-actions@github.com
+      - run: git --work-tree build/web add --all
+      - run: git commit -m "Automatic deployment by github-actions"
+      - run: git push origin HEAD:gh-pages --force

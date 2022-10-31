@@ -2,7 +2,6 @@ import 'package:blog/app/cubit/app_cubit.dart';
 import 'package:blog/bottom_tab/bottom_tab.dart';
 import 'package:blog/l10n/l10n.dart';
 import 'package:blog/links/links.dart';
-import 'package:blog/posts/posts.dart';
 import 'package:blog/trips/view/trips_page.dart';
 import 'package:blog/widgets/widgets.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +26,6 @@ class BottomTabView extends StatelessWidget {
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
     HeaderWidget(),
-    PostsPage(),
     LinksPage(),
     TripsPage(),
   ];
@@ -43,7 +41,7 @@ class BottomTabView extends StatelessWidget {
         actions: [
           MaterialButton(
             child: const TextWidget(
-              text: 'Português 🇧🇷',
+              text: '🇧🇷',
               color: Colors.white,
             ),
             onPressed: () {
@@ -52,7 +50,7 @@ class BottomTabView extends StatelessWidget {
           ),
           MaterialButton(
             child: const TextWidget(
-              text: 'English 🇺🇸',
+              text: '🇺🇸',
               color: Colors.white,
             ),
             onPressed: () {
@@ -68,10 +66,6 @@ class BottomTabView extends StatelessWidget {
           BottomNavigationBarItem(
             icon: const FaIcon(FontAwesomeIcons.houseUser),
             label: l10n.tabHome,
-          ),
-          BottomNavigationBarItem(
-            icon: const FaIcon(FontAwesomeIcons.feather),
-            label: l10n.tabBlog,
           ),
           BottomNavigationBarItem(
             icon: const FaIcon(FontAwesomeIcons.link),
