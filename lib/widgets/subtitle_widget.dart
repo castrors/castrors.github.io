@@ -14,7 +14,7 @@ class SubtitleWidget extends StatelessWidget {
     return Text(
       text,
       style: GoogleFonts.ubuntu(
-        textStyle: Theme.of(context).textTheme.headline6,
+        textStyle: Theme.of(context).textTheme.headlineLarge,
         color: color,
       ),
     );

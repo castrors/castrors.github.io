@@ -1,8 +1,9 @@
+// ignore_for_file: avoid_dynamic_calls
+
 import 'package:blog/extensions/color.dart';
 import 'package:blog/extensions/extensions.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class Link extends Equatable {
   const Link({

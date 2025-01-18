@@ -8,20 +8,20 @@ void main() {
   dashbook.storiesOf('Blog Title').decorator(CenterDecorator()).add(
         'default',
         (ctx) => TitleWidget(
-          text: ctx.textProperty("text", "Title"),
+          text: ctx.textProperty('text', 'Title'),
         ),
       );
   dashbook.storiesOf('Blog Subtitle').decorator(CenterDecorator()).add(
         'default',
         (ctx) => SubtitleWidget(
-          text: ctx.textProperty("text", "Subtitle"),
+          text: ctx.textProperty('text', 'Subtitle'),
         ),
       );
 
   dashbook.storiesOf('Blog Description').decorator(CenterDecorator()).add(
         'default',
         (ctx) => DescriptionWidget(
-          text: ctx.textProperty("text", "Description"),
+          text: ctx.textProperty('text', 'Description'),
         ),
       );
   dashbook.storiesOf('Blog Header').decorator(CenterDecorator()).add(

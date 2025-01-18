@@ -14,7 +14,7 @@ class LinksPopulated extends StatelessWidget {
       itemBuilder: (buildContext, index) {
         final link = links[index];
         return Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8),
           child: ListTile(
             leading: CircleAvatar(
               backgroundColor: link.color,
@@ -34,5 +34,9 @@ class LinksPopulated extends StatelessWidget {
   }
 }
 
-void _launchURL(String url) async =>
-    await canLaunch(url) ? await launch(url) : throw 'Could not launch $url';
+Future<void> _launchURL(String url) async {
+  final uri = Uri.parse(url);
+  if (await canLaunchUrl(uri)) {
+    await launchUrl(uri);
+  }
+}

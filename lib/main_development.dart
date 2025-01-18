@@ -8,15 +8,17 @@
 import 'dart:async';
 import 'dart:developer';
 
-import 'package:flutter/widgets.dart';
 import 'package:bloc/bloc.dart';
 import 'package:blog/app/app.dart';
 import 'package:blog/app/app_bloc_observer.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_web_plugins/url_strategy.dart';
 
 void main() async {
   Bloc.observer = AppBlocObserver();
-  await dotenv.load(fileName: "dotenv");
+  usePathUrlStrategy();
+  await dotenv.load(fileName: 'dotenv');
   FlutterError.onError = (details) {
     log(details.exceptionAsString(), stackTrace: details.stack);
   };

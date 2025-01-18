@@ -33,9 +33,8 @@ class LinksView extends StatelessWidget {
           case LinksStatus.success:
             return LinksPopulated(links: state.links);
           case LinksStatus.failure:
-          default:
-            return const Text('error');
         }
+        return const Text('error');
       },
     );
   }

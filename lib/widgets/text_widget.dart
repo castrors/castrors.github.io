@@ -18,7 +18,7 @@ class TextWidget extends StatelessWidget {
     return Text(
       text,
       style: GoogleFonts.ubuntu(
-        textStyle: Theme.of(context).textTheme.bodyText1,
+        textStyle: Theme.of(context).textTheme.bodyMedium,
         fontSize: fontSize,
         color: color,
       ),

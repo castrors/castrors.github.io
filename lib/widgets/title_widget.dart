@@ -13,7 +13,7 @@ class TitleWidget extends StatelessWidget {
     return Text(
       text,
       style: GoogleFonts.ubuntu(
-        textStyle: Theme.of(context).textTheme.headline4,
+        textStyle: Theme.of(context).textTheme.headlineMedium,
         color: Colors.black,
       ),
     );
