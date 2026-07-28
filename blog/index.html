@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base href="/"/>
+    <meta charset="utf-8"/>
+    <style>
+      html, body {
+        width: 100%;
+        min-height: 100vh;
+        padding: 0;
+        margin: 0;
+        font-family: 'Hanken Grotesk', sans-serif;
+      }
+      body {
+        color: #FFF1E8;
+        background-color: #000000;
+      }
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #011038;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #5F574F;
+        border: 2px solid #011038;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #29ADFF;
+      }
+      .pico-border {
+        border: 2px solid #5F574F;
+        box-shadow: 4px 4px 0px #000000;
+      }
+      .pico-border-hover:hover {
+        border-color: #29ADFF;
+        box-shadow: 4px 4px 0px #1D2B53;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .glass-card {
+        background: #1D2B53;
+        border: 2px solid #5F574F;
+        transition: all 0.2s steps(4);
+      }
+      .glass-card:hover {
+        transform: translate(-2px, -2px);
+        box-shadow: 4px 4px 0px #000000;
+      }
+      .card-pink:hover {
+        border-color: #FF77A8;
+      }
+      .card-blue:hover {
+        border-color: #29ADFF;
+      }
+      .card-green:hover {
+        border-color: #00E436;
+      }
+      .card-yellow:hover {
+        border-color: #FFEC27;
+      }
+      .card-orange:hover {
+        border-color: #FFA300;
+      }
+      .pico-card {
+        background-color: #1D2B53;
+        border: 4px solid #83769C;
+        box-shadow: 6px 6px 0px #000000;
+        transition: all 0.1s steps(2);
+      }
+      .pico-card:hover {
+        transform: translate(-2px, -2px);
+        box-shadow: 8px 8px 0px #29ADFF;
+        border-color: #29ADFF;
+      }
+      .pico-btn-primary {
+        background-color: #00E436;
+        color: #000000;
+        box-shadow: 4px 4px 0px #008751;
+        border: none;
+      }
+      .pico-btn-primary:active {
+        transform: translate(2px, 2px);
+        box-shadow: 0px 0px 0px #008751;
+      }
+      .pico-btn-secondary {
+        background-color: #29ADFF;
+        color: #000000;
+        box-shadow: 4px 4px 0px #1D2B53;
+        border: none;
+      }
+      .pico-btn-secondary:active {
+        transform: translate(2px, 2px);
+        box-shadow: 0px 0px 0px #1D2B53;
+      }
+      .scanline {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to bottom, rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(to right, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+        background-size: 100% 4px, 3px 100%;
+        pointer-events: none;
+        z-index: 100;
+      }
+      .header-anchor {
+        letter-spacing: -0.05em;
+        text-shadow: 4px 4px 0px #AB5236;
+      }
+      .glitch-text:hover {
+        color: #FF004D;
+        text-shadow: 2px 2px 0px #29ADFF;
+      }
+      .custom-cursor {
+        width: 16px;
+        height: 16px;
+        border: 2px solid #FFEC27;
+        position: fixed;
+        pointer-events: none;
+        z-index: 9999;
+        transition: transform 0.05s linear;
+        image-rendering: pixelated;
+      }
+      .timeline-line {
+        background: linear-gradient(to bottom, transparent, #FF004D 10%, #FF004D 90%, transparent);
+      }
+    </style>
+    <link href="/images/profile.png" rel="icon" type="image/png"/>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;family=Hanken+Grotesk:wght@400;600&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+              tailwind.config = {
+                darkMode: "class",
+                theme: {
+                  extend: {
+                    "colors": {
+                      "error-container": "#93000a",
+                      "inverse-surface": "#dbe1ff",
+                      "on-error-container": "#ffdad6",
+                      "on-surface": "#dbe1ff",
+                      "surface-container": "#1D2B53",
+                      "background": "#011038",
+                      "on-primary-fixed-variant": "#004b74",
+                      "tertiary": "#dac900",
+                      "pico-brown": "#AB5236",
+                      "pico-black": "#000000",
+                      "pico-yellow": "#FFEC27",
+                      "on-secondary": "#68001a",
+                      "surface-variant": "#25335b",
+                      "surface-dim": "#011038",
+                      "outline": "#5F574F",
+                      "pico-red": "#FF004D",
+                      "on-secondary-fixed": "#40000c",
+                      "primary-fixed-dim": "#93ccff",
+                      "outline-variant": "#3f4851",
+                      "primary": "#29ADFF",
+                      "pico-light-grey": "#C2C3C7",
+                      "on-primary-container": "#003e61",
+                      "secondary-fixed": "#ffdada",
+                      "on-primary": "#003351",
+                      "on-tertiary-fixed-variant": "#4e4800",
+                      "inverse-primary": "#006398",
+                      "on-secondary-fixed-variant": "#920028",
+                      "tertiary-fixed": "#f8e51d",
+                      "error": "#ffb4ab",
+                      "surface-container-lowest": "#000b2e",
+                      "primary-fixed": "#cde5ff",
+                      "secondary": "#FFA300",
+                      "pico-peach": "#FFCCAA",
+                      "pico-green": "#00E436",
+                      "primary-container": "#29adff",
+                      "pico-blue": "#29ADFF",
+                      "on-tertiary-fixed": "#1f1c00",
+                      "surface-tint": "#29ADFF",
+                      "on-error": "#690005",
+                      "secondary-fixed-dim": "#ffb3b6",
+                      "pico-orange": "#FFA300",
+                      "pico-pink": "#FF77A8",
+                      "secondary-container": "#ff5168",
+                      "surface-container-highest": "#25335b",
+                      "pico-dark-green": "#008751",
+                      "tertiary-fixed-dim": "#dac900",
+                      "pico-dark-blue": "#1D2B53",
+                      "surface-container-low": "#091941",
+                      "pico-dark-purple": "#7E2553",
+                      "pico-dark-grey": "#5F574F",
+                      "on-tertiary": "#363100",
+                      "on-background": "#dbe1ff",
+                      "on-tertiary-container": "#413b00",
+                      "on-surface-variant": "#83769C",
+                      "surface-bright": "#2a3760",
+                      "surface-container-high": "#1a2850",
+                      "inverse-on-surface": "#212e57",
+                      "pico-indigo": "#83769C",
+                      "on-primary-fixed": "#001d31",
+                      "tertiary-container": "#b5a700",
+                      "pico-white": "#FFF1E8",
+                      "surface": "#011038",
+                      "on-secondary-container": "#5b0015"
+                    },
+                    "borderRadius": {
+                      "DEFAULT": "0px",
+                      "lg": "4px",
+                      "xl": "8px",
+                      "full": "9999px"
+                    },
+                    "spacing": {
+                      "unit-4": "16px",
+                      "margin-desktop": "64px",
+                      "unit-2": "8px",
+                      "margin-mobile": "16px",
+                      "unit-12": "48px",
+                      "unit-1": "4px",
+                      "base": "4px",
+                      "unit-8": "32px",
+                      "gutter": "24px",
+                      "container-max": "1120px"
+                    },
+                    "fontFamily": {
+                      "headline-md": ["Space Grotesk"],
+                      "label-sm": ["JetBrains Mono"],
+                      "body-md": ["Hanken Grotesk"],
+                      "label-md": ["JetBrains Mono"],
+                      "body-lg": ["Hanken Grotesk"],
+                      "headline-lg": ["Space Grotesk"],
+                      "headline-lg-mobile": ["Space Grotesk"],
+                      "headline-sm": ["Space Grotesk"]
+                    }
+                  }
+                }
+              };
+            
+    </script>
+    <!--$-->
+    <title>Blog | Rodrigo Castro</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="Escritos e pensamentos sobre design, arquitetura e desenvolvimento web por Rodrigo Castro."/>
+    <meta name="keywords" content="blog, design, brutalismo, webassembly, minimalismo, arquitetura moderna"/>
+    <!--/-->
+    <script src="main.client.dart.js" defer></script>
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Roboto);
+      html, body {
+        width: 100%;
+        min-height: 100vh;
+        padding: 0;
+        margin: 0;
+        font-family: 'Roboto', sans-serif;
+      }
+      h1 {
+        margin: unset;
+        font-size: 4rem;
+      }
+    </style>
+  </head>
+  <body>
+    <!--@app-->
+    <div>
+      <nav class="fixed top-0 w-full z-50 bg-pico-black/95 backdrop-blur-sm border-b-4 border-pico-dark-grey transition-all">
+        <div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto h-20">
+          <a class="font-headline-md text-[24px] uppercase tracking-widest text-pico-white cursor-pointer header-anchor active:translate-y-0.5 transition-all text-decoration-none" href="/">rodrigocastro.dev</a>
+          <div class="hidden md:flex items-center gap-unit-8">
+            <a class="text-pico-light-grey hover:text-pico-blue transition-colors font-label-md uppercase glitch-text" href="/">Jornada</a>
+            <a class="text-pico-blue border-pico-blue font-bold border-b-4 pb-1 font-label-md uppercase" href="/blog">Blog</a>
+            <a class="text-pico-light-grey hover:text-pico-blue transition-colors font-label-md uppercase glitch-text" href="/links">Links</a>
+            <a class="text-pico-light-grey hover:text-pico-blue transition-colors font-label-md uppercase glitch-text" href="/apps">Apps</a>
+          </div>
+          <div class="hidden md:flex items-center gap-unit-4">
+            <button class="bg-pico-black text-pico-white px-unit-3 py-unit-2 font-label-sm uppercase font-bold border-2 border-pico-white shadow-[4px_4px_0px_#fff] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all cursor-pointer">🌐 EN</button>
+            <a class="inline-block bg-pico-green text-pico-black px-unit-4 py-unit-2 font-label-sm uppercase font-bold border-2 border-pico-black shadow-[4px_4px_0px_#000] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all cursor-pointer text-decoration-none" href="mailto:rodrigodesouzacastro@gmail.com">Contato</a>
+          </div>
+          <button class="md:hidden text-pico-blue focus:outline-none bg-transparent border-none cursor-pointer"><span class="material-symbols-outlined text-[32px]">menu</span></button>
+        </div>
+      </nav>
+      <main class="pt-20 bg-[#011038] text-[#dbe1ff] min-h-screen pb-unit-12">
+        <section class="max-w-container-max mx-auto px-margin-mobile mb-unit-12 pt-unit-12">
+          <span class="font-label-sm text-pico-orange mb-unit-2 block tracking-widest uppercase">Pensamentos &amp; Artigos</span>
+          <h1 class="font-headline-lg-mobile md:font-headline-lg text-[40px] md:text-[56px] text-pico-white mb-unit-8 uppercase leading-none">Escritos sobre design,<br/>arquitetura e código.</h1>
+          <div class="flex flex-col md:flex-row gap-unit-4 items-center justify-between border-b-2 border-pico-dark-grey pb-unit-8">
+            <div class="flex gap-unit-2 overflow-x-auto w-full md:w-auto pb-unit-2 md:pb-0 no-scrollbar">
+              <button class="px-unit-4 py-unit-1 bg-primary text-pico-black font-label-sm uppercase rounded-full whitespace-nowrap cursor-pointer mr-2">Tudo</button>
+              <button class="px-unit-4 py-unit-1 bg-pico-dark-blue border border-pico-dark-grey text-on-surface-variant hover:text-primary font-label-sm uppercase rounded-full transition-all whitespace-nowrap cursor-pointer mr-2">Design</button>
+              <button class="px-unit-4 py-unit-1 bg-pico-dark-blue border border-pico-dark-grey text-on-surface-variant hover:text-primary font-label-sm uppercase rounded-full transition-all whitespace-nowrap cursor-pointer mr-2">Tecnologia</button>
+              <button class="px-unit-4 py-unit-1 bg-pico-dark-blue border border-pico-dark-grey text-on-surface-variant hover:text-primary font-label-sm uppercase rounded-full transition-all whitespace-nowrap cursor-pointer mr-2">Carreira</button>
+            </div>
+            <div class="relative w-full md:w-80 group">
+              <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-pico-dark-grey group-focus-within:text-primary transition-colors">search</span>
+              <input class="w-full bg-pico-dark-blue border-2 border-pico-dark-grey focus:border-primary rounded-xl pl-10 pr-unit-4 py-unit-2 font-label-md text-pico-white placeholder:text-pico-dark-grey outline-none" placeholder="Pesquisar artigos..." type="text"/>
+            </div>
+          </div>
+        </section>
+        <section class="max-w-container-max mx-auto px-margin-mobile">
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+            <a class="md:col-span-8 group cursor-pointer text-decoration-none block" href="/blog/detail?id=1653417">
+              <article class="w-full">
+                <div class="pico-border overflow-hidden rounded-xl aspect-[16/9] mb-unit-4 bg-pico-dark-blue relative">
+                  <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-60 group-hover:opacity-100 grayscale group-hover:grayscale-0" src="https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fk11t7x1h3zos5jikygl2.jpeg"/>
+                  <div class="absolute top-4 left-4">
+                    <span class="px-unit-2 py-1 bg-pico-orange text-pico-black font-label-sm uppercase rounded border border-pico-black">Destaque</span>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex items-center gap-unit-2 mb-unit-2">
+                    <span class="font-label-sm text-primary uppercase">Tecnologia</span>
+                    <span class="w-1 h-1 bg-pico-dark-grey rounded-full"></span>
+                    <span class="font-label-sm text-on-surface-variant">01 de Novembro, 2023</span>
+                  </div>
+                  <h2 class="font-headline-md text-[32px] text-pico-white group-hover:text-primary transition-colors mb-unit-4 uppercase leading-tight">How I migrated the icon font generation in my Flutter app and why</h2>
+                  <p class="font-body-lg text-on-surface-variant line-clamp-2 max-w-2xl">
+                    Versão em Português:                                        Como eu migrei o modo de gerar as fontes...
+                  </p>
+                </div>
+              </article>
+            </a>
+            <div class="md:col-span-4 flex flex-col gap-unit-8">
+              <a class="group cursor-pointer text-decoration-none block" href="/blog/detail?id=1653402">
+                <article>
+                  <div class="flex gap-unit-4">
+                    <div class="w-24 h-24 shrink-0 rounded-lg overflow-hidden border-2 border-pico-dark-grey group-hover:border-primary transition-colors bg-pico-dark-blue">
+                      <img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all" src="https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2F8n3l71f5a7n7esbd729b.jpeg"/>
+                    </div>
+                    <div>
+                      <span class="font-label-sm text-pico-dark-grey block mb-1">01 de Novembro, 2023</span>
+                      <h3 class="font-headline-sm text-[20px] text-pico-white group-hover:text-primary transition-colors leading-tight uppercase line-clamp-2">Como eu migrei o modo de gerar as fontes de ícones no meu app Flutter e o porquê</h3>
+                    </div>
+                  </div>
+                </article>
+              </a>
+              <a class="group cursor-pointer text-decoration-none block" href="/blog/detail?id=1445410">
+                <article>
+                  <div class="flex gap-unit-4">
+                    <div class="w-24 h-24 shrink-0 rounded-lg overflow-hidden border-2 border-pico-dark-grey group-hover:border-primary transition-colors bg-pico-dark-blue">
+                      <img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all" src="https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2F91yxwaixtcbl2kwjpj31.png"/>
+                    </div>
+                    <div>
+                      <span class="font-label-sm text-pico-dark-grey block mb-1">23 de Abril, 2023</span>
+                      <h3 class="font-headline-sm text-[20px] text-pico-white group-hover:text-primary transition-colors leading-tight uppercase line-clamp-2">Notebook de bambu</h3>
+                    </div>
+                  </div>
+                </article>
+              </a>
+              <a class="group cursor-pointer text-decoration-none block" href="/blog/detail?id=1210456">
+                <article>
+                  <div class="flex gap-unit-4">
+                    <div class="w-24 h-24 shrink-0 rounded-lg overflow-hidden border-2 border-pico-dark-grey group-hover:border-primary transition-colors bg-pico-dark-blue">
+                      <img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all" src="https://media2.dev.to/dynamic/image/width=1000,height=500,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fchu3pf762voyin28bd7u.png"/>
+                    </div>
+                    <div>
+                      <span class="font-label-sm text-pico-dark-grey block mb-1">04 de Outubro, 2022</span>
+                      <h3 class="font-headline-sm text-[20px] text-pico-white group-hover:text-primary transition-colors leading-tight uppercase line-clamp-2">Publishing your Flutter apps into GitHub pages</h3>
+                    </div>
+                  </div>
+                </article>
+              </a>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter mt-unit-8">
+            <a class="group cursor-pointer text-decoration-none block" href="/blog/detail?id=1210442">
+              <div class="bg-pico-dark-blue p-unit-4 rounded-xl border-2 border-pico-dark-grey group-hover:border-primary transition-all shadow-[4px_4px_0px_#000000]">
+                <div class="aspect-video rounded-lg overflow-hidden mb-unit-4 border border-pico-dark-grey bg-pico-black">
+                  <img class="w-full h-full object-cover opacity-60 grayscale group-hover:opacity-100 group-hover:grayscale-0 transition-all" src="https://media2.dev.to/dynamic/image/width=1000,height=500,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fgo7f51qwqax56q7667ct.png"/>
+                </div>
+                <span class="font-label-sm text-pico-orange mb-unit-2 block uppercase">Tecnologia</span>
+                <h3 class="font-headline-sm text-[20px] mb-unit-2 text-pico-white uppercase line-clamp-1">Publicando suas aplicações Flutter no GitHub Pages</h3>
+                <p class="font-body-md text-on-surface-variant line-clamp-2">English version:                                         Publishing your Flutter apps into GitHub...</p>
+                <div class="mt-unit-8 pt-unit-4 border-t-2 border-pico-dark-grey flex justify-between items-center">
+                  <span class="font-label-sm text-pico-dark-grey">5 min de leitura</span>
+                  <span class="material-symbols-outlined text-primary group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                </div>
+              </div>
+            </a>
+            <a class="group cursor-pointer text-decoration-none block" href="/blog/detail?id=1094779">
+              <div class="bg-pico-dark-blue p-unit-4 rounded-xl border-2 border-pico-dark-grey group-hover:border-primary transition-all shadow-[4px_4px_0px_#000000]">
+                <div class="aspect-video rounded-lg overflow-hidden mb-unit-4 border border-pico-dark-grey bg-pico-black">
+                  <img class="w-full h-full object-cover opacity-60 grayscale group-hover:opacity-100 group-hover:grayscale-0 transition-all" src="https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2F6sxthlaond208xfj93uc.jpg"/>
+                </div>
+                <span class="font-label-sm text-pico-orange mb-unit-2 block uppercase">Carreira</span>
+                <h3 class="font-headline-sm text-[20px] mb-unit-2 text-pico-white uppercase line-clamp-1">Mudança de emprego na Alemanha 🇩🇪</h3>
+                <p class="font-body-md text-on-surface-variant line-clamp-2">
+                  Esse post é uma continuação desse post aqui:                                        Como vim parar na...
+                </p>
+                <div class="mt-unit-8 pt-unit-4 border-t-2 border-pico-dark-grey flex justify-between items-center">
+                  <span class="font-label-sm text-pico-dark-grey">5 min de leitura</span>
+                  <span class="material-symbols-outlined text-primary group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                </div>
+              </div>
+            </a>
+            <a class="group cursor-pointer text-decoration-none block" href="/blog/detail?id=1067938">
+              <div class="bg-pico-dark-blue p-unit-4 rounded-xl border-2 border-pico-dark-grey group-hover:border-primary transition-all shadow-[4px_4px_0px_#000000]">
+                <div class="aspect-video rounded-lg overflow-hidden mb-unit-4 border border-pico-dark-grey bg-pico-black">
+                  <img class="w-full h-full object-cover opacity-60 grayscale group-hover:opacity-100 group-hover:grayscale-0 transition-all" src="https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fvva21zhft5g0u5h19bhv.jpg"/>
+                </div>
+                <span class="font-label-sm text-pico-orange mb-unit-2 block uppercase">Carreira</span>
+                <h3 class="font-headline-sm text-[20px] mb-unit-2 text-pico-white uppercase line-clamp-1">Como vim parar na Alemanha 🇩🇪?</h3>
+                <p class="font-body-md text-on-surface-variant line-clamp-2">Quem sou eu?   Sou Rodrigo Castro, sou desenvolvedor de software desde 2014, trabalhei a...</p>
+                <div class="mt-unit-8 pt-unit-4 border-t-2 border-pico-dark-grey flex justify-between items-center">
+                  <span class="font-label-sm text-pico-dark-grey">5 min de leitura</span>
+                  <span class="material-symbols-outlined text-primary group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="flex justify-center items-center gap-unit-4 mt-unit-12">
+            <button class="w-10 h-10 flex items-center justify-center rounded-lg border-2 border-pico-dark-grey text-on-surface-variant hover:border-primary hover:text-primary transition-all shadow-[2px_2px_0px_#000000] active:translate-y-0.5 active:shadow-none cursor-pointer"><span class="material-symbols-outlined">chevron_left</span></button>
+            <div class="flex gap-unit-2">
+              <button class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary text-pico-black font-label-sm border-2 border-pico-black shadow-[2px_2px_0px_#000000] cursor-pointer">1</button>
+              <button class="w-10 h-10 flex items-center justify-center rounded-lg border-2 border-pico-dark-grey text-on-surface-variant hover:border-primary hover:text-primary font-label-sm transition-all shadow-[2px_2px_0px_#000000] active:translate-y-0.5 active:shadow-none cursor-pointer">2</button>
+              <button class="w-10 h-10 flex items-center justify-center rounded-lg border-2 border-pico-dark-grey text-on-surface-variant hover:border-primary hover:text-primary font-label-sm transition-all shadow-[2px_2px_0px_#000000] active:translate-y-0.5 active:shadow-none cursor-pointer">3</button>
+            </div>
+            <button class="w-10 h-10 flex items-center justify-center rounded-lg border-2 border-pico-dark-grey text-on-surface-variant hover:border-primary hover:text-primary transition-all shadow-[2px_2px_0px_#000000] active:translate-y-0.5 active:shadow-none cursor-pointer"><span class="material-symbols-outlined">chevron_right</span></button>
+          </div>
+        </section>
+        <section class="max-w-container-max mx-auto px-margin-mobile mt-unit-12">
+          <div class="bg-pico-dark-blue rounded-2xl p-unit-8 border-4 border-pico-dark-grey relative overflow-hidden shadow-[8px_8px_0px_#000000]">
+            <div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 blur-3xl -mr-32 -mt-32"></div>
+            <div class="relative z-10 max-w-2xl">
+              <h2 class="font-headline-lg-mobile text-[32px] text-pico-white mb-unit-4 uppercase">Fique por dentro das novidades.</h2>
+              <p class="font-body-lg text-on-surface-variant mb-unit-8">
+                Receba artigos exclusivos e insights sobre o futuro do design e tecnologia diretamente no seu e-mail.
+              </p>
+              <form class="flex flex-col sm:flex-row gap-unit-4">
+                <input class="flex-grow bg-background border-2 border-pico-dark-grey focus:border-primary rounded-xl px-unit-4 py-unit-2 text-pico-white font-label-md outline-none" placeholder="seu@email.com" type="email"/>
+                <button class="bg-pico-orange text-pico-black px-unit-8 py-unit-2 font-label-sm uppercase rounded-xl hover:bg-pico-white transition-all active:translate-y-0.5 border-b-4 border-pico-brown cursor-pointer" type="submit">Inscrever-se</button>
+              </form>
+            </div>
+          </div>
+        </section>
+      </main>
+      <footer class="w-full py-unit-12 bg-pico-black border-t-4 border-pico-dark-grey mt-auto">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-unit-8 max-w-container-max mx-auto px-margin-mobile">
+          <div class="font-label-sm text-pico-blue uppercase tracking-widest bg-pico-dark-blue/50 px-3 py-1.5 border border-pico-blue">Rodrigo Castro // SYS_VER_1.0</div>
+          <p class="font-label-sm text-pico-light-grey uppercase text-center md:text-left">© 2026 FLUTTER_RUN: SUCCESS.</p>
+          <div class="flex gap-unit-8">
+            <a class="text-pico-light-grey hover:text-pico-red transition-colors font-label-sm uppercase tracking-wider" href="mailto:rodrigodesouzacastro@gmail.com">Email</a>
+            <a class="text-pico-light-grey hover:text-pico-blue transition-colors font-label-sm uppercase tracking-wider" href="https://www.linkedin.com/in/castrodev/">LinkedIn</a>
+            <a class="text-pico-light-grey hover:text-pico-green transition-colors font-label-sm uppercase tracking-wider" href="https://github.com/castrors">GitHub</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <!--/@app-->
+  </body>
+</html>

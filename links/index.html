@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base href="/"/>
+    <meta charset="utf-8"/>
+    <style>
+      html, body {
+        width: 100%;
+        min-height: 100vh;
+        padding: 0;
+        margin: 0;
+        font-family: 'Hanken Grotesk', sans-serif;
+      }
+      body {
+        color: #FFF1E8;
+        background-color: #000000;
+      }
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #011038;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #5F574F;
+        border: 2px solid #011038;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #29ADFF;
+      }
+      .pico-border {
+        border: 2px solid #5F574F;
+        box-shadow: 4px 4px 0px #000000;
+      }
+      .pico-border-hover:hover {
+        border-color: #29ADFF;
+        box-shadow: 4px 4px 0px #1D2B53;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .glass-card {
+        background: #1D2B53;
+        border: 2px solid #5F574F;
+        transition: all 0.2s steps(4);
+      }
+      .glass-card:hover {
+        transform: translate(-2px, -2px);
+        box-shadow: 4px 4px 0px #000000;
+      }
+      .card-pink:hover {
+        border-color: #FF77A8;
+      }
+      .card-blue:hover {
+        border-color: #29ADFF;
+      }
+      .card-green:hover {
+        border-color: #00E436;
+      }
+      .card-yellow:hover {
+        border-color: #FFEC27;
+      }
+      .card-orange:hover {
+        border-color: #FFA300;
+      }
+      .pico-card {
+        background-color: #1D2B53;
+        border: 4px solid #83769C;
+        box-shadow: 6px 6px 0px #000000;
+        transition: all 0.1s steps(2);
+      }
+      .pico-card:hover {
+        transform: translate(-2px, -2px);
+        box-shadow: 8px 8px 0px #29ADFF;
+        border-color: #29ADFF;
+      }
+      .pico-btn-primary {
+        background-color: #00E436;
+        color: #000000;
+        box-shadow: 4px 4px 0px #008751;
+        border: none;
+      }
+      .pico-btn-primary:active {
+        transform: translate(2px, 2px);
+        box-shadow: 0px 0px 0px #008751;
+      }
+      .pico-btn-secondary {
+        background-color: #29ADFF;
+        color: #000000;
+        box-shadow: 4px 4px 0px #1D2B53;
+        border: none;
+      }
+      .pico-btn-secondary:active {
+        transform: translate(2px, 2px);
+        box-shadow: 0px 0px 0px #1D2B53;
+      }
+      .scanline {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to bottom, rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(to right, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+        background-size: 100% 4px, 3px 100%;
+        pointer-events: none;
+        z-index: 100;
+      }
+      .header-anchor {
+        letter-spacing: -0.05em;
+        text-shadow: 4px 4px 0px #AB5236;
+      }
+      .glitch-text:hover {
+        color: #FF004D;
+        text-shadow: 2px 2px 0px #29ADFF;
+      }
+      .custom-cursor {
+        width: 16px;
+        height: 16px;
+        border: 2px solid #FFEC27;
+        position: fixed;
+        pointer-events: none;
+        z-index: 9999;
+        transition: transform 0.05s linear;
+        image-rendering: pixelated;
+      }
+      .timeline-line {
+        background: linear-gradient(to bottom, transparent, #FF004D 10%, #FF004D 90%, transparent);
+      }
+    </style>
+    <link href="/images/profile.png" rel="icon" type="image/png"/>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;family=Hanken+Grotesk:wght@400;600&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+              tailwind.config = {
+                darkMode: "class",
+                theme: {
+                  extend: {
+                    "colors": {
+                      "error-container": "#93000a",
+                      "inverse-surface": "#dbe1ff",
+                      "on-error-container": "#ffdad6",
+                      "on-surface": "#dbe1ff",
+                      "surface-container": "#1D2B53",
+                      "background": "#011038",
+                      "on-primary-fixed-variant": "#004b74",
+                      "tertiary": "#dac900",
+                      "pico-brown": "#AB5236",
+                      "pico-black": "#000000",
+                      "pico-yellow": "#FFEC27",
+                      "on-secondary": "#68001a",
+                      "surface-variant": "#25335b",
+                      "surface-dim": "#011038",
+                      "outline": "#5F574F",
+                      "pico-red": "#FF004D",
+                      "on-secondary-fixed": "#40000c",
+                      "primary-fixed-dim": "#93ccff",
+                      "outline-variant": "#3f4851",
+                      "primary": "#29ADFF",
+                      "pico-light-grey": "#C2C3C7",
+                      "on-primary-container": "#003e61",
+                      "secondary-fixed": "#ffdada",
+                      "on-primary": "#003351",
+                      "on-tertiary-fixed-variant": "#4e4800",
+                      "inverse-primary": "#006398",
+                      "on-secondary-fixed-variant": "#920028",
+                      "tertiary-fixed": "#f8e51d",
+                      "error": "#ffb4ab",
+                      "surface-container-lowest": "#000b2e",
+                      "primary-fixed": "#cde5ff",
+                      "secondary": "#FFA300",
+                      "pico-peach": "#FFCCAA",
+                      "pico-green": "#00E436",
+                      "primary-container": "#29adff",
+                      "pico-blue": "#29ADFF",
+                      "on-tertiary-fixed": "#1f1c00",
+                      "surface-tint": "#29ADFF",
+                      "on-error": "#690005",
+                      "secondary-fixed-dim": "#ffb3b6",
+                      "pico-orange": "#FFA300",
+                      "pico-pink": "#FF77A8",
+                      "secondary-container": "#ff5168",
+                      "surface-container-highest": "#25335b",
+                      "pico-dark-green": "#008751",
+                      "tertiary-fixed-dim": "#dac900",
+                      "pico-dark-blue": "#1D2B53",
+                      "surface-container-low": "#091941",
+                      "pico-dark-purple": "#7E2553",
+                      "pico-dark-grey": "#5F574F",
+                      "on-tertiary": "#363100",
+                      "on-background": "#dbe1ff",
+                      "on-tertiary-container": "#413b00",
+                      "on-surface-variant": "#83769C",
+                      "surface-bright": "#2a3760",
+                      "surface-container-high": "#1a2850",
+                      "inverse-on-surface": "#212e57",
+                      "pico-indigo": "#83769C",
+                      "on-primary-fixed": "#001d31",
+                      "tertiary-container": "#b5a700",
+                      "pico-white": "#FFF1E8",
+                      "surface": "#011038",
+                      "on-secondary-container": "#5b0015"
+                    },
+                    "borderRadius": {
+                      "DEFAULT": "0px",
+                      "lg": "4px",
+                      "xl": "8px",
+                      "full": "9999px"
+                    },
+                    "spacing": {
+                      "unit-4": "16px",
+                      "margin-desktop": "64px",
+                      "unit-2": "8px",
+                      "margin-mobile": "16px",
+                      "unit-12": "48px",
+                      "unit-1": "4px",
+                      "base": "4px",
+                      "unit-8": "32px",
+                      "gutter": "24px",
+                      "container-max": "1120px"
+                    },
+                    "fontFamily": {
+                      "headline-md": ["Space Grotesk"],
+                      "label-sm": ["JetBrains Mono"],
+                      "body-md": ["Hanken Grotesk"],
+                      "label-md": ["JetBrains Mono"],
+                      "body-lg": ["Hanken Grotesk"],
+                      "headline-lg": ["Space Grotesk"],
+                      "headline-lg-mobile": ["Space Grotesk"],
+                      "headline-sm": ["Space Grotesk"]
+                    }
+                  }
+                }
+              };
+            
+    </script>
+    <!--$-->
+    <title>Links | Rodrigo Castro</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="Conecte-se com Rodrigo Castro. Links oficiais do portfólio, LinkedIn, GitHub e publicações."/>
+    <meta name="keywords" content="linktree, links, contact, social links, portfolio, github"/>
+    <!--/-->
+    <script src="main.client.dart.js" defer></script>
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Roboto);
+      html, body {
+        width: 100%;
+        min-height: 100vh;
+        padding: 0;
+        margin: 0;
+        font-family: 'Roboto', sans-serif;
+      }
+      h1 {
+        margin: unset;
+        font-size: 4rem;
+      }
+    </style>
+  </head>
+  <body>
+    <!--@app-->
+    <div>
+      <nav class="fixed top-0 w-full z-50 bg-pico-black/95 backdrop-blur-sm border-b-4 border-pico-dark-grey transition-all">
+        <div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto h-20">
+          <a class="font-headline-md text-[24px] uppercase tracking-widest text-pico-white cursor-pointer header-anchor active:translate-y-0.5 transition-all text-decoration-none" href="/">rodrigocastro.dev</a>
+          <div class="hidden md:flex items-center gap-unit-8">
+            <a class="text-pico-light-grey hover:text-pico-blue transition-colors font-label-md uppercase glitch-text" href="/">Jornada</a>
+            <a class="text-pico-light-grey hover:text-pico-blue transition-colors font-label-md uppercase glitch-text" href="/blog">Blog</a>
+            <a class="text-pico-blue border-pico-blue font-bold border-b-4 pb-1 font-label-md uppercase" href="/links">Links</a>
+            <a class="text-pico-light-grey hover:text-pico-blue transition-colors font-label-md uppercase glitch-text" href="/apps">Apps</a>
+          </div>
+          <div class="hidden md:flex items-center gap-unit-4">
+            <button class="bg-pico-black text-pico-white px-unit-3 py-unit-2 font-label-sm uppercase font-bold border-2 border-pico-white shadow-[4px_4px_0px_#fff] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all cursor-pointer">🌐 EN</button>
+            <a class="inline-block bg-pico-green text-pico-black px-unit-4 py-unit-2 font-label-sm uppercase font-bold border-2 border-pico-black shadow-[4px_4px_0px_#000] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all cursor-pointer text-decoration-none" href="mailto:rodrigodesouzacastro@gmail.com">Contato</a>
+          </div>
+          <button class="md:hidden text-pico-blue focus:outline-none bg-transparent border-none cursor-pointer"><span class="material-symbols-outlined text-[32px]">menu</span></button>
+        </div>
+      </nav>
+      <main class="relative min-h-screen pt-32 pb-unit-12 px-margin-mobile bg-[#000000] text-[#FFF1E8]">
+        <div class="max-w-xl mx-auto relative z-10">
+          <header class="text-center mb-unit-12 pt-unit-4 flex flex-col items-center">
+            <div class="inline-block relative mb-unit-8">
+              <div class="w-24 h-24 rounded-full p-1 bg-pico-blue border-2 border-pico-white shadow-[4px_4px_0px_#7E2553] overflow-hidden">
+                <img class="w-full h-full object-cover rounded-full filter grayscale contrast-125" alt="Portrait" src="/images/profile.png"/>
+              </div>
+              <div class="absolute -bottom-1 -right-1 w-7 h-7 bg-pico-green rounded-full border-2 border-pico-black flex items-center justify-center">
+                <span class="material-symbols-outlined text-[14px] text-pico-black font-bold" style="font-variation-settings: 'FILL' 1">verified</span>
+              </div>
+            </div>
+            <h1 class="font-headline-lg text-[40px] md:text-[56px] text-pico-white mb-unit-2 uppercase tracking-tight">Rodrigo Castro</h1>
+            <p class="font-body-lg text-pico-light-grey mb-unit-4 max-w-lg mx-auto">Senior Mobile Developer. Criando aplicativos de alta performance, elegantes e acessíveis.</p>
+            <div class="flex justify-center gap-unit-2">
+              <span class="px-unit-2 py-0.5 border-2 border-pico-blue text-pico-blue font-label-sm uppercase">Flutter</span>
+              <span class="px-unit-2 py-0.5 border-2 border-pico-pink text-pico-pink font-label-sm uppercase">Dart</span>
+              <span class="px-unit-2 py-0.5 border-2 border-pico-green text-pico-green font-label-sm uppercase">Android</span>
+            </div>
+          </header>
+          <div class="space-y-unit-4">
+            <a class="glass-card card-blue flex items-center p-unit-4 group cursor-pointer text-decoration-none" href="https://castrors.github.io/">
+              <div class="w-12 h-12 flex items-center justify-center bg-pico-blue text-pico-black mr-unit-4">
+                <span class="material-symbols-outlined text-pico-black text-2xl" style="font-variation-settings: 'FILL' 1">language</span>
+              </div>
+              <div class="flex-grow">
+                <h3 class="font-headline-sm text-[20px] text-pico-white uppercase mb-0">Portfólio Principal</h3>
+                <p class="font-label-sm text-pico-blue mt-1 mb-0">castrors.github.io</p>
+              </div>
+              <span class="material-symbols-outlined text-pico-blue opacity-0 group-hover:opacity-100 transition-opacity">arrow_forward</span>
+            </a>
+            <a class="glass-card card-pink flex items-center p-unit-4 group cursor-pointer text-decoration-none" href="https://www.linkedin.com/in/castrodev/">
+              <div class="w-12 h-12 flex items-center justify-center bg-pico-pink text-pico-black mr-unit-4">
+                <span class="material-symbols-outlined text-pico-black text-2xl" style="font-variation-settings: 'FILL' 1">work</span>
+              </div>
+              <div class="flex-grow">
+                <h3 class="font-headline-sm text-[20px] text-pico-white uppercase mb-0">LinkedIn</h3>
+                <p class="font-label-sm text-pico-pink mt-1 mb-0">Conexões profissionais</p>
+              </div>
+              <span class="material-symbols-outlined text-pico-pink opacity-0 group-hover:opacity-100 transition-opacity">arrow_forward</span>
+            </a>
+            <a class="glass-card card-green flex items-center p-unit-4 group cursor-pointer text-decoration-none" href="https://github.com/castrors">
+              <div class="w-12 h-12 flex items-center justify-center bg-pico-green text-pico-black mr-unit-4">
+                <span class="material-symbols-outlined text-pico-black text-2xl" style="font-variation-settings: 'FILL' 1">code</span>
+              </div>
+              <div class="flex-grow">
+                <h3 class="font-headline-sm text-[20px] text-pico-white uppercase mb-0">GitHub</h3>
+                <p class="font-label-sm text-pico-green mt-1 mb-0">Repositórios e Open Source</p>
+              </div>
+              <span class="material-symbols-outlined text-pico-green opacity-0 group-hover:opacity-100 transition-opacity">arrow_forward</span>
+            </a>
+            <a class="glass-card card-yellow flex items-center p-unit-4 group cursor-pointer text-decoration-none" href="https://dev.to/rodrigocastro_o">
+              <div class="w-12 h-12 flex items-center justify-center bg-pico-yellow text-pico-black mr-unit-4">
+                <span class="material-symbols-outlined text-pico-black text-2xl" style="font-variation-settings: 'FILL' 1">description</span>
+              </div>
+              <div class="flex-grow">
+                <h3 class="font-headline-sm text-[20px] text-pico-white uppercase mb-0">DEV.to</h3>
+                <p class="font-label-sm text-pico-yellow mt-1 mb-0">Artigos e publicações técnicas</p>
+              </div>
+              <span class="material-symbols-outlined text-pico-yellow opacity-0 group-hover:opacity-100 transition-opacity">arrow_forward</span>
+            </a>
+            <a class="glass-card card-pink flex items-center p-unit-4 group cursor-pointer text-decoration-none" href="https://instagram.com/rodrigocastro_o">
+              <div class="w-12 h-12 flex items-center justify-center bg-pico-pink text-pico-black mr-unit-4">
+                <span class="material-symbols-outlined text-pico-black text-2xl" style="font-variation-settings: 'FILL' 1">photo_camera</span>
+              </div>
+              <div class="flex-grow">
+                <h3 class="font-headline-sm text-[20px] text-pico-white uppercase mb-0">Instagram</h3>
+                <p class="font-label-sm text-pico-pink mt-1 mb-0">Fotos e momentos</p>
+              </div>
+              <span class="material-symbols-outlined text-pico-pink opacity-0 group-hover:opacity-100 transition-opacity">arrow_forward</span>
+            </a>
+            <a class="glass-card card-blue flex items-center p-unit-4 group cursor-pointer text-decoration-none" href="https://bsky.app/profile/rodrigocastro.flutter.community">
+              <div class="w-12 h-12 flex items-center justify-center bg-pico-blue text-pico-black mr-unit-4">
+                <span class="material-symbols-outlined text-pico-black text-2xl" style="font-variation-settings: 'FILL' 1">cloud</span>
+              </div>
+              <div class="flex-grow">
+                <h3 class="font-headline-sm text-[20px] text-pico-white uppercase mb-0">Bluesky</h3>
+                <p class="font-label-sm text-pico-blue mt-1 mb-0">Rede social descentralizada</p>
+              </div>
+              <span class="material-symbols-outlined text-pico-blue opacity-0 group-hover:opacity-100 transition-opacity">arrow_forward</span>
+            </a>
+            <a class="glass-card card-green flex items-center p-unit-4 group cursor-pointer text-decoration-none" href="https://unsplash.com/@rodrigocastro_o">
+              <div class="w-12 h-12 flex items-center justify-center bg-pico-green text-pico-black mr-unit-4">
+                <span class="material-symbols-outlined text-pico-black text-2xl" style="font-variation-settings: 'FILL' 1">image</span>
+              </div>
+              <div class="flex-grow">
+                <h3 class="font-headline-sm text-[20px] text-pico-white uppercase mb-0">Unsplash</h3>
+                <p class="font-label-sm text-pico-green mt-1 mb-0">Fotografia profissional</p>
+              </div>
+              <span class="material-symbols-outlined text-pico-green opacity-0 group-hover:opacity-100 transition-opacity">arrow_forward</span>
+            </a>
+            <a class="glass-card card-orange flex items-center p-unit-4 group cursor-pointer text-decoration-none" href="https://www.youtube.com/channel/UCPRdmUZXiPz5_2XokXsPPbA?view_as=subscriber">
+              <div class="w-12 h-12 flex items-center justify-center bg-pico-orange text-pico-black mr-unit-4">
+                <span class="material-symbols-outlined text-pico-black text-2xl" style="font-variation-settings: 'FILL' 1">play_circle</span>
+              </div>
+              <div class="flex-grow">
+                <h3 class="font-headline-sm text-[20px] text-pico-white uppercase mb-0">YouTube</h3>
+                <p class="font-label-sm text-pico-orange mt-1 mb-0">Vídeos e apresentações</p>
+              </div>
+              <span class="material-symbols-outlined text-pico-orange opacity-0 group-hover:opacity-100 transition-opacity">arrow_forward</span>
+            </a>
+          </div>
+        </div>
+        <script>
+                    (function() {
+                      document.querySelectorAll('.glass-card').forEach(card => {
+                        card.addEventListener('mouseenter', () => {
+                          const icon = card.querySelector('.material-symbols-outlined');
+                          if (icon) {
+                            icon.style.fontVariationSettings = "'FILL' 1, 'wght' 600";
+                          }
+                        });
+                        card.addEventListener('mouseleave', () => {
+                          const icon = card.querySelector('.material-symbols-outlined');
+                          if (icon) {
+                            icon.style.fontVariationSettings = "'FILL' 0, 'wght' 300";
+                          }
+                        });
+                      });
+                    })();
+                  
+        </script>
+      </main>
+      <footer class="w-full py-unit-12 bg-pico-black border-t-4 border-pico-dark-grey mt-auto">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-unit-8 max-w-container-max mx-auto px-margin-mobile">
+          <div class="font-label-sm text-pico-blue uppercase tracking-widest bg-pico-dark-blue/50 px-3 py-1.5 border border-pico-blue">Rodrigo Castro // SYS_VER_1.0</div>
+          <p class="font-label-sm text-pico-light-grey uppercase text-center md:text-left">© 2026 FLUTTER_RUN: SUCCESS.</p>
+          <div class="flex gap-unit-8">
+            <a class="text-pico-light-grey hover:text-pico-red transition-colors font-label-sm uppercase tracking-wider" href="mailto:rodrigodesouzacastro@gmail.com">Email</a>
+            <a class="text-pico-light-grey hover:text-pico-blue transition-colors font-label-sm uppercase tracking-wider" href="https://www.linkedin.com/in/castrodev/">LinkedIn</a>
+            <a class="text-pico-light-grey hover:text-pico-green transition-colors font-label-sm uppercase tracking-wider" href="https://github.com/castrors">GitHub</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <!--/@app-->
+  </body>
+</html>
