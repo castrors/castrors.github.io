@@ -1,0 +1,35 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    concurrency: ci-${{ github.ref }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v4
+
+      - name: Install Dart 🎯
+        uses: dart-lang/setup-dart@v1
+
+      - name: Install dependencies 📦
+        run: dart pub get
+
+      - name: Install Jaspr CLI 🛠️
+        run: dart pub global activate jaspr_cli
+
+      - name: Build 🏗️
+        run: $HOME/.pub-cache/bin/jaspr build
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: build/jaspr
+          branch: gh-pages
