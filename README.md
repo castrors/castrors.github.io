@@ -1,83 +1,83 @@
 # rodrigocastro.dev 🌐
 
-Portfólio e blog profissional desenvolvido com **Jaspr** — o framework web moderno para Dart que permite renderização estática rápida (SSG) com hidratação dinâmica no lado do cliente.
+Professional portfolio and blog built with **Jaspr** — the modern web framework for Dart that enables fast static site generation (SSG) with dynamic client-side hydration.
 
-O site possui uma identidade visual retro-brutalista inspirada na paleta de cores clássica do Pico-8, com animações sutis, cursor customizado reativo e um efeito de scanline opcional.
-
----
-
-## 🚀 Funcionalidades
-
-- **🌐 Suporte Bilíngue (PT / EN):**
-  - Sistema de tradução reativo com `InheritedComponent` (`TranslationProvider`).
-  - Detecção automática do idioma do navegador na primeira visita.
-  - Sincronização em tempo real do idioma na URL (`?lang=en` ou `?lang=pt`) sem recarregamento da página (usando `window.history.replaceState`).
-  - Salvamento automático de preferência no `localStorage`.
-- **💼 Linha do Tempo Profissional (Journey):**
-  - Histórico profissional com marcadores e palavras-chave otimizadas a partir do currículo.
-- **🎮 Galeria de Projetos (Apps):**
-  - Showcase de aplicativos reais desenvolvidos, incluindo o jogo **The Crossing Puzzle** (construído com Flutter e Flame Engine).
-- **🔗 Página de Links Integrada:**
-  - Versão customizada inspirada em plataformas de Linktree/Bento com acesso direto às redes sociais e projetos principais.
-- **⚡ SEO & Acessibilidade:**
-  - Cabeçalhos semânticos estruturados, metadados dinâmicos e favicon customizado usando o avatar do GitHub.
-- **📦 CI/CD Automatizado:**
-  - Pipeline no GitHub Actions para compilação e deploy automático na branch `gh-pages` com suporte a domínio customizado (`CNAME`).
+The website features a retro-brutalist visual identity inspired by the classic Pico-8 color palette, with subtle animations, a reactive custom cursor, and an optional scanline overlay effect.
 
 ---
 
-## 📁 Estrutura do Projeto
+## 🚀 Features
+
+- **🌐 Bilingual Support (PT / EN):**
+  - Reactive translation system using an `InheritedComponent` (`TranslationProvider`).
+  - Automatic browser language preference detection on first visit.
+  - Real-time language sync with the URL (`?lang=en` or `?lang=pt`) without page reloads (using `window.history.replaceState`).
+  - Automatic language preference saving in `localStorage`.
+- **💼 Professional Timeline (Journey):**
+  - Career history with bullet highlights and optimized keywords imported from the CV.
+- **🎮 Project Showcase (Apps):**
+  - Showcase of real-world applications, including the game **The Crossing Puzzle** (built with Flutter and Flame Engine).
+- **🔗 Integrated Links Page:**
+  - A custom page inspired by Linktree/Bento setups with direct access to social networks and main projects.
+- **⚡ SEO & Accessibility:**
+  - Semantic HTML5 header structures, dynamic metadata tags, and a custom favicon using the GitHub profile avatar.
+- **📦 Automated CI/CD:**
+  - GitHub Actions pipeline to automatically build and deploy the app to the `gh-pages` branch, with support for a custom domain (`CNAME`).
+
+---
+
+## 📁 Project Structure
 
 ```text
-├── .github/workflows/    # Configuração de CI/CD (Deploy para GitHub Pages)
+├── .github/workflows/    # CI/CD configuration (GitHub Pages Deployment)
 ├── lib/
-│   ├── components/       # Componentes globais (Header, Footer, TranslationProvider)
-│   ├── constants/        # Tokens de estilo e temas
-│   ├── data/             # Dados estáticos (Lista de posts do Blog)
-│   ├── models/           # Modelos de dados
-│   ├── pages/            # Páginas do site (Home, Apps, Links, Blog, PostDetail)
-│   ├── utils/            # Utilitários de compilação condicional para Web/Browser
-│   └── app.dart          # Componente raiz cliente (@client)
-├── web/                  # Arquivos estáticos compilados (Imagens, CNAME, favicon)
-├── pubspec.yaml          # Dependências do projeto Dart/Jaspr
-└── README.md             # Documentação do projeto
+│   ├── components/       # Global components (Header, Footer, TranslationProvider)
+│   ├── constants/        # Styling tokens and themes
+│   ├── data/             # Static data (Blog posts list)
+│   ├── models/           # Data models
+│   ├── pages/            # App pages (Home, Apps, Links, Blog, PostDetail)
+│   ├── utils/            # Multiplatform conditional imports for safe Web/Browser execution
+│   └── app.dart          # Client root component (@client)
+├── web/                  # Static assets (images, CNAME, favicon)
+├── pubspec.yaml          # Project dependencies (Dart/Jaspr configuration)
+└── README.md             # Project documentation
 ```
 
 ---
 
-## 🛠️ Comandos de Desenvolvimento
+## 🛠️ Development Commands
 
-### Rodar Localmente
-Inicia o servidor de desenvolvimento com suporte a recarga rápida:
+### Run Locally
+Starts the development server with hot reload support:
 ```bash
 jaspr serve
 ```
-O servidor estará acessível em `http://localhost:8080`.
+The server will be available on `http://localhost:8080`.
 
-### Formatar o Código
-Padroniza a formatação do código de acordo com o estilo oficial do Dart:
+### Format Code
+Formats all Dart files according to the official style guide guidelines:
 ```bash
 dart format .
 ```
 
-### Análise Estática
-Verifica a presença de erros de sintaxe, warnings e regras de lint do projeto:
+### Static Analysis
+Runs code analysis for syntax errors, warnings, and custom project lint rules:
 ```bash
 dart analyze
 ```
 
-### Gerar Build Estática
-Gera a versão estática otimizada do site na pasta `build/jaspr/`:
+### Generate Static Build
+Compiles the application to optimized static HTML/JS files inside the `build/jaspr/` directory:
 ```bash
 jaspr build
 ```
 
 ---
 
-## 📦 Publicação no GitHub Pages
+## 📦 GitHub Pages Deployment
 
-O deploy é feito de forma automatizada via GitHub Actions sempre que novas alterações são enviadas para a branch `main`.
+Deployments are automated via GitHub Actions on every push to the `main` branch.
 
-1. O fluxo no GitHub Actions executa o `jaspr build`.
-2. O resultado da pasta `build/jaspr` é enviado de forma isolada para a branch `gh-pages`.
-3. O domínio `rodrigocastro.dev` é mapeado pelo arquivo `CNAME` localizado na raiz da branch de deploy.
+1. The GitHub Actions workflow executes `jaspr build`.
+2. The static files in `build/jaspr` are pushed in isolation to the `gh-pages` branch.
+3. The custom domain `rodrigocastro.dev` is automatically mapped by the `CNAME` file located in the root of the deployment branch.
