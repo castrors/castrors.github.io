@@ -17,32 +17,24 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Dart 🎯
-        uses: dart-lang/setup-dart@v1.3
-
-      - name: Increase swap space 🧠
-        run: |
-          sudo swapoff -a || true
-          sudo fallocate -l 10G /swapfile
-          sudo chmod 600 /swapfile
-          sudo mkswap /swapfile
-          sudo swapon /swapfile
-          sudo swapon --show
+        uses: dart-lang/setup-dart@v1
 
       - name: Install dependencies 📦
         run: dart pub get
-
-      - name: Install Jaspr CLI 🛠️
-        run: dart pub global activate jaspr_cli
 
       - name: Create Firebase Config File 🔑
         env:
           FIREBASE_CONFIG: ${{ secrets.FIREBASECONFIG }}
         run: echo "$FIREBASE_CONFIG" > firebase_config.json
 
-      - name: Build Jaspr 🏗️
-        run: |
-          cd $(pwd -P)
-          $HOME/.pub-cache/bin/jaspr build --verbose
+      - name: Build Web Assets 📦
+        run: dart run build_runner build --release -o web:build/jaspr
+
+      - name: Build Server App ⚙️
+        run: dart compile exe lib/main.server.dart -o build/app -Djaspr.flags.release=true -Djaspr.dev.web=build/jaspr
+
+      - name: Pre-render Static Pages 🏗️
+        run: dart run tool/generate_static.dart
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
