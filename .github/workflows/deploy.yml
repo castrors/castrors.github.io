@@ -36,9 +36,13 @@ jobs:
         run: dart run build_runner clean
 
       - name: Build Web Assets 📦
+        env:
+          HOME: /home/runner
         run: dart run build_runner build --release
 
       - name: Build 🏗️
+        env:
+          HOME: /home/runner
         run: dart pub global run jaspr_cli:jaspr build
 
       - name: Print Build Daemon Logs on Failure 📋
