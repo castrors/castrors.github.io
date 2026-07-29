@@ -31,7 +31,9 @@ jobs:
         run: echo "$FIREBASE_CONFIG" > firebase_config.json
 
       - name: Build Jaspr 🏗️
-        run: $HOME/.pub-cache/bin/jaspr build --verbose
+        run: |
+          cd $(pwd -P)
+          $HOME/.pub-cache/bin/jaspr build --verbose
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
