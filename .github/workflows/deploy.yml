@@ -23,12 +23,15 @@ jobs:
         run: dart pub get
 
       - name: Install Jaspr CLI 🛠️
-        run: dart pub global activate jaspr_cli
+        run: dart pub global activate jaspr_cli 0.23.2
 
       - name: Create Firebase Config File 🔑
         env:
           FIREBASE_CONFIG: ${{ secrets.FIREBASECONFIG }}
         run: echo "$FIREBASE_CONFIG" > firebase_config.json
+
+      - name: Clean build runner cache 🧹
+        run: dart run build_runner clean
 
       - name: Build 🏗️
         run: $HOME/.pub-cache/bin/jaspr build
