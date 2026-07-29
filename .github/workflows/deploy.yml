@@ -35,6 +35,9 @@ jobs:
       - name: Clean build runner cache 🧹
         run: dart run build_runner clean
 
+      - name: Build Web Assets 📦
+        run: dart run build_runner build --release
+
       - name: Build 🏗️
         run: dart pub global run jaspr_cli:jaspr build
 
