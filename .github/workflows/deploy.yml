@@ -36,6 +36,11 @@ jobs:
       - name: Build 🏗️
         run: $HOME/.pub-cache/bin/jaspr build
 
+      - name: Print Build Daemon Logs on Failure 📋
+        if: failure()
+        run: |
+          find .dart_tool -name "*.log" -o -name "*.txt" | xargs cat || true
+
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
