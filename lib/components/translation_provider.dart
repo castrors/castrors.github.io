@@ -135,6 +135,38 @@ const Map<String, Map<String, String>> translations = {
     'cta_title_part2': 'extraordinário',
     'cta_title_part3': '?',
     'cta_desc': 'Estou sempre aberto a novas colaborações e desafios técnicos complexos.',
+
+    // Blog Page
+    'blog_page_title': 'Blog | Rodrigo Castro',
+    'blog_meta_desc': 'Escritos e pensamentos sobre design, arquitetura e desenvolvimento web por Rodrigo Castro.',
+    'blog_meta_keywords': 'blog, design, brutalismo, webassembly, minimalismo, arquitetura moderna',
+    'blog_hero_subtitle': 'Pensamentos & Artigos',
+    'blog_hero_title_1': 'Escritos sobre design,',
+    'blog_hero_title_2': 'arquitetura e código.',
+    'blog_search_placeholder': 'Pesquisar artigos...',
+    'blog_no_posts': 'Nenhum artigo encontrado',
+    'blog_no_posts_desc': 'Tente buscar por termos diferentes ou selecione outra categoria.',
+    'blog_featured': 'Destaque',
+    'blog_newsletter_title': 'Fique por dentro das novidades.',
+    'blog_newsletter_desc': 'Receba artigos exclusivos e insights sobre o futuro do design e tecnologia diretamente no seu e-mail.',
+    'blog_newsletter_email_placeholder': 'seu@email.com',
+    'blog_newsletter_button': 'Inscrever-se',
+
+    // Post Detail Page
+    'post_not_found_title': 'Artigo não encontrado',
+    'post_not_found_desc': 'Desculpe, o artigo que você está procurando não existe ou foi removido.',
+    'post_back_to_blog': 'VOLTAR AO BLOG',
+    'post_liked_it': 'Gostou do post?',
+    'post_follow_devto': 'Seguir no Dev.to',
+    'post_see_all': 'Ver todos os artigos',
+    'post_related_article': 'Artigo Relacionado',
+    'post_view_article_devto': 'Ver artigo no Dev.to',
+
+    // Categories
+    'cat_all': 'Tudo',
+    'cat_design': 'Design',
+    'cat_tech': 'Tecnologia',
+    'cat_career': 'Carreira',
   },
   'en': {
     'nav_journey': 'Journey',
@@ -230,5 +262,37 @@ const Map<String, Map<String, String>> translations = {
     'cta_title_part2': 'extraordinary',
     'cta_title_part3': '?',
     'cta_desc': 'I am always open to new collaborations and complex technical challenges.',
+
+    // Blog Page
+    'blog_page_title': 'Blog | Rodrigo Castro',
+    'blog_meta_desc': 'Writings and thoughts on design, architecture, and web development by Rodrigo Castro.',
+    'blog_meta_keywords': 'blog, design, brutalism, webassembly, minimalism, modern architecture',
+    'blog_hero_subtitle': 'Thoughts & Articles',
+    'blog_hero_title_1': 'Writings on design,',
+    'blog_hero_title_2': 'architecture and code.',
+    'blog_search_placeholder': 'Search articles...',
+    'blog_no_posts': 'No articles found',
+    'blog_no_posts_desc': 'Try searching for different terms or select another category.',
+    'blog_featured': 'Featured',
+    'blog_newsletter_title': 'Stay updated with news.',
+    'blog_newsletter_desc': 'Receive exclusive articles and insights about the future of design and technology directly in your inbox.',
+    'blog_newsletter_email_placeholder': 'your@email.com',
+    'blog_newsletter_button': 'Subscribe',
+
+    // Post Detail Page
+    'post_not_found_title': 'Article not found',
+    'post_not_found_desc': "Sorry, the article you are looking for doesn't exist or has been removed.",
+    'post_back_to_blog': 'BACK TO BLOG',
+    'post_liked_it': 'Liked the post?',
+    'post_follow_devto': 'Follow on Dev.to',
+    'post_see_all': 'View all articles',
+    'post_related_article': 'Related Article',
+    'post_view_article_devto': 'View article on Dev.to',
+
+    // Categories
+    'cat_all': 'All',
+    'cat_design': 'Design',
+    'cat_tech': 'Technology',
+    'cat_career': 'Career',
   },
 };

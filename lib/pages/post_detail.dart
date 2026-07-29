@@ -1,8 +1,29 @@
 import 'package:jaspr/dom.dart';
 import 'package:jaspr/jaspr.dart';
 
+import '../components/translation_provider.dart';
 import '../models/post.dart';
 import '../data/posts.dart';
+
+String _translateCategory(BuildContext context, String category) {
+  switch (category) {
+    case 'Tecnologia':
+      return context.t('cat_tech');
+    case 'Carreira':
+      return context.t('cat_career');
+    case 'Design':
+      return context.t('cat_design');
+    default:
+      return category;
+  }
+}
+
+String _translateReadingTime(BuildContext context, String readingTime) {
+  if (context.locale == 'en') {
+    return readingTime.replaceAll('min de leitura', 'min read');
+  }
+  return readingTime;
+}
 
 class PostDetailPage extends StatefulComponent {
   final String id;
@@ -20,14 +41,14 @@ class _PostDetailPageState extends State<PostDetailPage> {
 
     final post = allPosts.firstWhere(
       (postItem) => postItem.id == id || postItem.slug == id,
-      orElse: () => const Post(
+      orElse: () => Post(
         id: '',
         slug: '',
-        title: 'Artigo não encontrado',
+        title: context.t('post_not_found_title'),
         category: '',
         date: '',
         summary: '',
-        bodyMarkdown: 'Desculpe, o artigo que você está procurando não existe ou foi removido.',
+        bodyMarkdown: context.t('post_not_found_desc'),
         imageUrl: '',
         readingTime: '',
       ),
@@ -60,7 +81,7 @@ class _PostDetailPageState extends State<PostDetailPage> {
                   href: '/blog',
                   [
                     span(classes: 'material-symbols-outlined text-sm', [.text('arrow_back')]),
-                    .text('VOLTAR AO BLOG'),
+                    .text(context.t('post_back_to_blog')),
                   ],
                 ),
               ],
@@ -82,7 +103,7 @@ class _PostDetailPageState extends State<PostDetailPage> {
                 classes: 'mb-unit-8 border-b-4 border-pico-dark-grey pb-unit-8',
                 [
                   span(classes: 'font-label-sm text-pico-orange uppercase block mb-unit-2 tracking-widest', [
-                    .text(post.category),
+                    .text(_translateCategory(context, post.category)),
                   ]),
                   h1(
                     classes:
@@ -104,7 +125,7 @@ class _PostDetailPageState extends State<PostDetailPage> {
                         classes: 'flex items-center gap-1',
                         [
                           span(classes: 'material-symbols-outlined text-[14px]', [.text('schedule')]),
-                          span([.text(post.readingTime)]),
+                          span([.text(_translateReadingTime(context, post.readingTime))]),
                         ],
                       ),
                     ],
@@ -142,14 +163,14 @@ class _PostDetailPageState extends State<PostDetailPage> {
                   div(
                     classes: 'flex items-center gap-unit-2',
                     [
-                      span(classes: 'font-label-sm text-pico-dark-grey uppercase', [.text('Gostou do post?')]),
+                      span(classes: 'font-label-sm text-pico-dark-grey uppercase', [.text(context.t('post_liked_it'))]),
                       a(
                         classes:
                             'bg-pico-black/60 border-2 border-pico-dark-grey text-pico-yellow hover:border-pico-yellow font-label-sm uppercase px-3 py-1.5 text-decoration-none transition-all',
                         href: 'https://dev.to/rodrigocastro_o',
                         target: Target.blank,
                         [
-                          .text('Seguir no Dev.to'),
+                          .text(context.t('post_follow_devto')),
                         ],
                       ),
                     ],
@@ -159,7 +180,7 @@ class _PostDetailPageState extends State<PostDetailPage> {
                         'text-pico-blue hover:text-pico-white font-label-sm uppercase text-decoration-none flex items-center gap-1',
                     href: '/blog',
                     [
-                      .text('Ver todos os artigos'),
+                      .text(context.t('post_see_all')),
                       span(classes: 'material-symbols-outlined text-sm', [.text('arrow_forward')]),
                     ],
                   ),
@@ -290,9 +311,9 @@ class MarkdownBody extends StatelessComponent {
                   'my-unit-6 p-unit-4 bg-pico-dark-blue border-2 border-pico-blue rounded-xl flex items-center justify-between',
               [
                 div([
-                  span(classes: 'font-label-sm text-pico-blue block uppercase mb-1', [.text('Artigo Relacionado')]),
+                  span(classes: 'font-label-sm text-pico-blue block uppercase mb-1', [.text(context.t('post_related_article'))]),
                   a(classes: 'font-headline-sm text-pico-white hover:text-pico-blue text-decoration-none', href: url, [
-                    .text('Ver artigo no Dev.to'),
+                    .text(context.t('post_view_article_devto')),
                   ]),
                 ]),
                 span(classes: 'material-symbols-outlined text-pico-blue', [.text('launch')]),

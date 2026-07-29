@@ -1,8 +1,29 @@
 import 'package:jaspr/dom.dart';
 import 'package:jaspr/jaspr.dart';
 
+import '../components/translation_provider.dart';
 import '../models/post.dart';
 import '../data/posts.dart';
+
+String _translateCategory(BuildContext context, String category) {
+  switch (category) {
+    case 'Tecnologia':
+      return context.t('cat_tech');
+    case 'Carreira':
+      return context.t('cat_career');
+    case 'Design':
+      return context.t('cat_design');
+    default:
+      return category;
+  }
+}
+
+String _translateReadingTime(BuildContext context, String readingTime) {
+  if (context.locale == 'en') {
+    return readingTime.replaceAll('min de leitura', 'min read');
+  }
+  return readingTime;
+}
 
 class Blog extends StatefulComponent {
   const Blog({super.key});
@@ -46,14 +67,21 @@ class BlogState extends State<Blog> {
     );
     final otherPosts = posts.where((postItem) => posts.length <= 1 || postItem != featuredPost).toList();
 
+    final categories = [
+      (key: 'Tudo', label: context.t('cat_all')),
+      (key: 'Design', label: context.t('cat_design')),
+      (key: 'Tecnologia', label: context.t('cat_tech')),
+      (key: 'Carreira', label: context.t('cat_career')),
+    ];
+
     return main_(
       classes: 'pt-20 bg-[#011038] text-[#dbe1ff] min-h-screen pb-unit-12',
       [
         Document.head(
-          title: 'Blog | Rodrigo Castro',
+          title: context.t('blog_page_title'),
           meta: {
-            'description': 'Escritos e pensamentos sobre design, arquitetura e desenvolvimento web por Rodrigo Castro.',
-            'keywords': 'blog, design, brutalismo, webassembly, minimalismo, arquitetura moderna',
+            'description': context.t('blog_meta_desc'),
+            'keywords': context.t('blog_meta_keywords'),
           },
         ),
 
@@ -62,15 +90,15 @@ class BlogState extends State<Blog> {
           classes: 'max-w-container-max mx-auto px-margin-mobile mb-unit-12 pt-unit-12',
           [
             span(classes: 'font-label-sm text-pico-orange mb-unit-2 block tracking-widest uppercase', [
-              .text('Pensamentos & Artigos'),
+              .text(context.t('blog_hero_subtitle')),
             ]),
             h1(
               classes:
                   'font-headline-lg-mobile md:font-headline-lg text-[40px] md:text-[56px] text-pico-white mb-unit-8 uppercase leading-none',
               [
-                .text('Escritos sobre design,'),
+                .text(context.t('blog_hero_title_1')),
                 const br(),
-                .text('arquitetura e código.'),
+                .text(context.t('blog_hero_title_2')),
               ],
             ),
 
@@ -82,19 +110,19 @@ class BlogState extends State<Blog> {
                 div(
                   classes: 'flex gap-unit-2 overflow-x-auto w-full md:w-auto pb-unit-2 md:pb-0 no-scrollbar',
                   [
-                    for (var cat in ['Tudo', 'Design', 'Tecnologia', 'Carreira'])
+                    for (var cat in categories)
                       button(
-                        classes: _selectedCategory == cat
+                        classes: _selectedCategory == cat.key
                             ? 'px-unit-4 py-unit-1 bg-primary text-pico-black font-label-sm uppercase rounded-full whitespace-nowrap cursor-pointer mr-2'
                             : 'px-unit-4 py-unit-1 bg-pico-dark-blue border border-pico-dark-grey text-on-surface-variant hover:text-primary font-label-sm uppercase rounded-full transition-all whitespace-nowrap cursor-pointer mr-2',
                         events: {
                           'click': (_) {
                             setState(() {
-                              _selectedCategory = cat;
+                              _selectedCategory = cat.key;
                             });
                           },
                         },
-                        [.text(cat)],
+                        [.text(cat.label)],
                       ),
                   ],
                 ),
@@ -109,7 +137,7 @@ class BlogState extends State<Blog> {
                     input(
                       classes:
                           'w-full bg-pico-dark-blue border-2 border-pico-dark-grey focus:border-primary rounded-xl pl-10 pr-unit-4 py-unit-2 font-label-md text-pico-white placeholder:text-pico-dark-grey outline-none',
-                      attributes: const {'placeholder': 'Pesquisar artigos...'},
+                      attributes: {'placeholder': context.t('blog_search_placeholder')},
                       type: InputType.text,
                       events: {
                         'input': (e) {
@@ -133,9 +161,9 @@ class BlogState extends State<Blog> {
             classes: 'max-w-container-max mx-auto px-margin-mobile py-16 text-center',
             [
               span(classes: 'material-symbols-outlined text-[64px] text-pico-dark-grey mb-4', [.text('folder_open')]),
-              h3(classes: 'font-headline-sm text-pico-white', [.text('Nenhum artigo encontrado')]),
+              h3(classes: 'font-headline-sm text-pico-white', [.text(context.t('blog_no_posts'))]),
               p(classes: 'text-on-surface-variant mt-2', [
-                .text('Tente buscar por termos diferentes ou selecione outra categoria.'),
+                .text(context.t('blog_no_posts_desc')),
               ]),
             ],
           )
@@ -170,7 +198,7 @@ class BlogState extends State<Blog> {
                                     span(
                                       classes:
                                           'px-unit-2 py-1 bg-pico-orange text-pico-black font-label-sm uppercase rounded border border-pico-black',
-                                      [.text('Destaque')],
+                                      [.text(context.t('blog_featured'))],
                                     ),
                                   ],
                                 ),
@@ -182,7 +210,7 @@ class BlogState extends State<Blog> {
                                   classes: 'flex items-center gap-unit-2 mb-unit-2',
                                   [
                                     span(classes: 'font-label-sm text-primary uppercase', [
-                                      .text(featuredPost.category),
+                                      .text(_translateCategory(context, featuredPost.category)),
                                     ]),
                                     span(classes: 'w-1 h-1 bg-pico-dark-grey rounded-full', []),
                                     span(classes: 'font-label-sm text-on-surface-variant', [.text(featuredPost.date)]),
@@ -277,7 +305,7 @@ class BlogState extends State<Blog> {
                                 ],
                               ),
                               span(classes: 'font-label-sm text-pico-orange mb-unit-2 block uppercase', [
-                                .text(post.category),
+                                .text(_translateCategory(context, post.category)),
                               ]),
                               h3(
                                 classes:
@@ -289,7 +317,9 @@ class BlogState extends State<Blog> {
                                 classes:
                                     'mt-unit-8 pt-unit-4 border-t-2 border-pico-dark-grey flex justify-between items-center',
                                 [
-                                  span(classes: 'font-label-sm text-pico-dark-grey', [.text(post.readingTime)]),
+                                  span(classes: 'font-label-sm text-pico-dark-grey', [
+                                    .text(_translateReadingTime(context, post.readingTime)),
+                                  ]),
                                   span(
                                     classes:
                                         'material-symbols-outlined text-primary group-hover:translate-x-1 transition-transform',
@@ -360,12 +390,10 @@ class BlogState extends State<Blog> {
                   classes: 'relative z-10 max-w-2xl',
                   [
                     h2(classes: 'font-headline-lg-mobile text-[32px] text-pico-white mb-unit-4 uppercase', [
-                      .text('Fique por dentro das novidades.'),
+                      .text(context.t('blog_newsletter_title')),
                     ]),
                     p(classes: 'font-body-lg text-on-surface-variant mb-unit-8', [
-                      .text(
-                        'Receba artigos exclusivos e insights sobre o futuro do design e tecnologia diretamente no seu e-mail.',
-                      ),
+                      .text(context.t('blog_newsletter_desc')),
                     ]),
                     form(
                       classes: 'flex flex-col sm:flex-row gap-unit-4',
@@ -378,14 +406,14 @@ class BlogState extends State<Blog> {
                         input(
                           classes:
                               'flex-grow bg-background border-2 border-pico-dark-grey focus:border-primary rounded-xl px-unit-4 py-unit-2 text-pico-white font-label-md outline-none',
-                          attributes: const {'placeholder': 'seu@email.com'},
+                          attributes: {'placeholder': context.t('blog_newsletter_email_placeholder')},
                           type: InputType.email,
                         ),
                         button(
                           classes:
                               'bg-pico-orange text-pico-black px-unit-8 py-unit-2 font-label-sm uppercase rounded-xl hover:bg-pico-white transition-all active:translate-y-0.5 border-b-4 border-pico-brown cursor-pointer',
                           type: ButtonType.submit,
-                          [.text('Inscrever-se')],
+                          [.text(context.t('blog_newsletter_button'))],
                         ),
                       ],
                     ),
