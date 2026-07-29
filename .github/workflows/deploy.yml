@@ -35,6 +35,10 @@ jobs:
           rm -rf $HOME/.dart_tool/build/daemon || true
           rm -rf .dart_tool/build || true
 
+      - name: Test Build Daemon Startup 🧪
+        run: |
+          timeout 15s dart run build_runner daemon --release --verbose || true
+
       - name: Build 🏗️
         run: $HOME/.pub-cache/bin/jaspr build
 
