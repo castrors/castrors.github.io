@@ -19,6 +19,15 @@ jobs:
       - name: Setup Dart 🎯
         uses: dart-lang/setup-dart@v1.3
 
+      - name: Increase swap space 🧠
+        run: |
+          sudo swapoff -a || true
+          sudo fallocate -l 10G /swapfile
+          sudo chmod 600 /swapfile
+          sudo mkswap /swapfile
+          sudo swapon /swapfile
+          sudo swapon --show
+
       - name: Install dependencies 📦
         run: dart pub get
 
