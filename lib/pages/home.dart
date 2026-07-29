@@ -2,6 +2,7 @@ import 'package:jaspr/dom.dart';
 import 'package:jaspr/jaspr.dart';
 
 import '../components/translation_provider.dart';
+import '../utils/firebase_tracker.dart';
 
 class Home extends StatefulComponent {
   const Home({super.key});
@@ -13,6 +14,7 @@ class Home extends StatefulComponent {
 class HomeState extends State<Home> {
   @override
   Component build(BuildContext context) {
+    trackPageView('Home');
     return main_(
       classes: 'pt-20 bg-pico-dark-blue text-pico-white min-h-screen',
       [

@@ -2,12 +2,14 @@ import 'package:jaspr/dom.dart';
 import 'package:jaspr/jaspr.dart';
 
 import '../components/translation_provider.dart';
+import '../utils/firebase_tracker.dart';
 
 class Links extends StatelessComponent {
   const Links({super.key});
 
   @override
   Component build(BuildContext context) {
+    trackPageView('Links');
     final links = [
       (
         title: 'Portfólio Principal',

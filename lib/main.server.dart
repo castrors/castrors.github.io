@@ -4,6 +4,7 @@
 /// To run code on the client, check the `main.client.dart` file.
 library;
 
+import 'dart:io';
 import 'package:jaspr/dom.dart';
 // Server-specific Jaspr import.
 import 'package:jaspr/server.dart';
@@ -13,6 +14,16 @@ import 'app.dart';
 
 // This file is generated automatically by Jaspr, do not remove or edit.
 import 'main.server.options.dart';
+
+String getFirebaseConfigJson() {
+  try {
+    final file = File('firebase_config.json');
+    if (file.existsSync()) {
+      return file.readAsStringSync().trim();
+    }
+  } catch (_) {}
+  return '{}';
+}
 
 void main() {
   // Initializes the server environment with the generated default options.
@@ -42,6 +53,41 @@ void main() {
           href:
               'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap',
           rel: 'stylesheet',
+        ),
+        script(src: 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js'),
+        script(src: 'https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics-compat.js'),
+        script(
+          content: '''
+            window.firebaseConfig = ${getFirebaseConfigJson()};
+            window.initFirebase = function(config) {
+              if (!window.firebase) return;
+              window.firebaseApp = window.firebase.initializeApp(config);
+              window.firebaseAnalytics = window.firebase.analytics();
+              
+              // Global error tracking (exception logging)
+              window.addEventListener('error', function(event) {
+                if (window.firebaseAnalytics) {
+                  window.firebaseAnalytics.logEvent('exception', {
+                    'description': event.message,
+                    'fatal': true,
+                    'stack': event.error ? event.error.stack : ''
+                  });
+                }
+              });
+              window.addEventListener('unhandledrejection', function(event) {
+                if (window.firebaseAnalytics) {
+                  window.firebaseAnalytics.logEvent('exception', {
+                    'description': event.reason ? (event.reason.message || event.reason) : 'Unhandled Rejection',
+                    'fatal': true,
+                    'stack': event.reason ? event.reason.stack : ''
+                  });
+                }
+              });
+            };
+            if (window.firebaseConfig && window.firebaseConfig.apiKey) {
+              window.initFirebase(window.firebaseConfig);
+            }
+          ''',
         ),
         script(src: 'https://cdn.tailwindcss.com?plugins=forms,container-queries'),
         script(

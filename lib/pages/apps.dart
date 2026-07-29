@@ -2,12 +2,14 @@ import 'package:jaspr/dom.dart';
 import 'package:jaspr/jaspr.dart';
 
 import '../components/translation_provider.dart';
+import '../utils/firebase_tracker.dart';
 
 class Apps extends StatelessComponent {
   const Apps({super.key});
 
   @override
   Component build(BuildContext context) {
+    trackPageView('Apps');
     return main_(
       classes:
           'pt-20 pb-unit-12 px-unit-4 md:px-margin-desktop max-w-container-max mx-auto mt-20 bg-pico-black text-pico-white min-h-screen relative',

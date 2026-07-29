@@ -4,11 +4,13 @@
 /// To run code on the server during pre-rendering, check the `main.server.dart` file.
 library;
 
+import 'dart:async';
 // Client-specific Jaspr import.
 import 'package:jaspr/client.dart';
 
 // This file is generated automatically by Jaspr, do not remove or edit.
 import 'main.client.options.dart';
+import 'utils/firebase_tracker.dart';
 
 void main() {
   // Initializes the client environment with the generated default options.
@@ -16,13 +18,19 @@ void main() {
     options: defaultClientOptions,
   );
 
+  initializeFirebaseTracker();
+
   // Starts the app.
   //
   // [ClientApp] automatically loads and renders all components annotated with @client.
   //
   // You can wrap this with additional [InheritedComponent]s to share state across multiple
   // @client components if needed.
-  runApp(
-    const ClientApp(),
-  );
+  runZonedGuarded(() {
+    runApp(
+      const ClientApp(),
+    );
+  }, (error, stack) {
+    trackException(error, stack);
+  });
 }

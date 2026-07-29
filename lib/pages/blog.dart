@@ -4,6 +4,7 @@ import 'package:jaspr/jaspr.dart';
 import '../components/translation_provider.dart';
 import '../models/post.dart';
 import '../data/posts.dart';
+import '../utils/firebase_tracker.dart';
 
 String _translateCategory(BuildContext context, String category) {
   switch (category) {
@@ -48,6 +49,7 @@ class BlogState extends State<Blog> {
 
   @override
   Component build(BuildContext context) {
+    trackPageView('Blog');
     final posts = _filteredPosts;
     final featuredPost = posts.firstWhere(
       (postItem) => postItem.isFeatured,

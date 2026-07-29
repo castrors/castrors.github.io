@@ -4,6 +4,7 @@ import 'package:jaspr/jaspr.dart';
 import '../components/translation_provider.dart';
 import '../models/post.dart';
 import '../data/posts.dart';
+import '../utils/firebase_tracker.dart';
 
 String _translateCategory(BuildContext context, String category) {
   switch (category) {
@@ -38,6 +39,7 @@ class _PostDetailPageState extends State<PostDetailPage> {
   Component build(BuildContext context) {
     final uri = Uri.parse(context.url);
     final id = uri.queryParameters['id'] ?? component.id;
+    trackPageView('Post Detail: $id');
 
     final post = allPosts.firstWhere(
       (postItem) => postItem.id == id || postItem.slug == id,
