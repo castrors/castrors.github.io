@@ -37,11 +37,11 @@ jobs:
 
       - name: Build 🏗️
         run: |
-          # Pre-start build daemon with matching build options and compiler defines to satisfy connection checks
-          dart run build_runner daemon --release --verbose --delete-conflicting-outputs --define=build_web_compilers:entrypoint=compiler=dart2js --define=build_web_compilers:entrypoint=dart2js_args='["-Djaspr.flags.release=true","-O2"]' &
+          # Pre-start build daemon without managed options to avoid dynamic define mismatches
+          dart run build_runner daemon --release --verbose --delete-conflicting-outputs &
           sleep 50
-          # Run jaspr build which connects to the running daemon instantly
-          $HOME/.pub-cache/bin/jaspr build
+          # Run jaspr build with --no-managed-build-options so requested options match running daemon 100%
+          $HOME/.pub-cache/bin/jaspr build --no-managed-build-options
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
