@@ -37,10 +37,10 @@ jobs:
 
       - name: Build 🏗️
         run: |
-          # Pre-start build daemon in the background to handle AOT compiler warm-up (>30s)
-          dart run build_runner daemon --release --verbose &
+          # Pre-start build daemon with matching build options and compiler defines to satisfy connection checks
+          dart run build_runner daemon --release --verbose --delete-conflicting-outputs --define=build_web_compilers:entrypoint=compiler=dart2js --define=build_web_compilers:entrypoint=dart2js_args='["-Djaspr.flags.release=true","-O2"]' &
           sleep 50
-          # Run jaspr build which connects to the already warm running daemon instantly
+          # Run jaspr build which connects to the running daemon instantly
           $HOME/.pub-cache/bin/jaspr build
 
       - name: Deploy 🚀
