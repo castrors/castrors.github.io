@@ -35,12 +35,13 @@ jobs:
           rm -rf $HOME/.dart_tool/build/daemon || true
           rm -rf .dart_tool/build || true
 
-      - name: Test Build Daemon Startup 🧪
-        run: |
-          timeout 60s dart run build_runner daemon --release --verbose || true
-
       - name: Build 🏗️
-        run: $HOME/.pub-cache/bin/jaspr build
+        run: |
+          # Pre-start build daemon in the background to handle AOT compiler warm-up (>30s)
+          dart run build_runner daemon --release --verbose &
+          sleep 50
+          # Run jaspr build which connects to the already warm running daemon instantly
+          $HOME/.pub-cache/bin/jaspr build
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
