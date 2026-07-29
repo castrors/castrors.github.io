@@ -18,37 +18,25 @@ jobs:
 
       - name: Install Dart 🎯
         uses: dart-lang/setup-dart@v1
-        with:
-          sdk: '3.11.0'
 
       - name: Install dependencies 📦
         run: dart pub get
 
       - name: Install Jaspr CLI 🛠️
-        run: dart pub global activate jaspr_cli 0.23.2
+        run: dart pub global activate jaspr_cli
 
       - name: Create Firebase Config File 🔑
         env:
           FIREBASE_CONFIG: ${{ secrets.FIREBASECONFIG }}
         run: echo "$FIREBASE_CONFIG" > firebase_config.json
 
-      - name: Clean build runner cache 🧹
-        run: dart run build_runner clean
-
-      - name: Build Web Assets 📦
-        env:
-          HOME: /home/runner
-        run: dart run build_runner build --release
+      - name: Clear build daemon locks 🧹
+        run: |
+          rm -rf $HOME/.dart_tool/build/daemon || true
+          rm -rf .dart_tool/build || true
 
       - name: Build 🏗️
-        env:
-          HOME: /home/runner
-        run: dart pub global run jaspr_cli:jaspr build
-
-      - name: Print Build Daemon Logs on Failure 📋
-        if: failure()
-        run: |
-          find .dart_tool -name "*.log" -o -name "*.txt" | xargs cat || true
+        run: $HOME/.pub-cache/bin/jaspr build
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
