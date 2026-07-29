@@ -34,7 +34,7 @@ jobs:
         run: dart run build_runner clean
 
       - name: Build 🏗️
-        run: $HOME/.pub-cache/bin/jaspr build
+        run: $HOME/.pub-cache/bin/jaspr build -v
 
       - name: Print Build Daemon Logs on Failure 📋
         if: failure()
